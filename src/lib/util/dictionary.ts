@@ -86,6 +86,7 @@ const dictionary = {
     cart: {
       title: "Sort",
       empty_title: "Your shopping bag is empty",
+      empty_message: "Let's change that, use the link below to start browsing our products.",
       empty_cta: "Explore products",
       go_to_cart: "Go to cart",
       signin_prompt: "Already have an account? Sign in for a better experience.",
@@ -279,6 +280,7 @@ const dictionary = {
     cart: {
       title: "Sepet",
       empty_title: "Sepetiniz boş",
+      empty_message: "Hadi bunu değiştirelim, aşağıdaki linki kullanarak ürünlerimizi keşfedin.",
       empty_cta: "Ürünleri keşfet",
       go_to_cart: "Sepete git",
       signin_prompt: "Hesabınız var mı? Daha iyi bir deneyim için giriş yapın.",
