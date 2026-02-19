@@ -16,9 +16,11 @@ import { useCallback, useEffect, useState } from "react"
 const Payment = ({
   cart,
   availablePaymentMethods,
+  dictionary,
 }: {
   cart: any
   availablePaymentMethods: any[]
+  dictionary?: any
 }) => {
   const activeSession = cart.payment_collection?.payment_sessions?.find(
     (paymentSession: any) => paymentSession.status === "pending"
@@ -117,7 +119,7 @@ const Payment = ({
             }
           )}
         >
-          Payment
+          {dictionary?.checkout?.payment ?? "Payment"}
           {!isOpen && paymentReady && <CheckCircleSolid />}
         </Heading>
         {!isOpen && paymentReady && (
@@ -127,7 +129,7 @@ const Payment = ({
               className="text-ui-fg-interactive hover:text-ui-fg-interactive-hover"
               data-testid="edit-payment-button"
             >
-              Edit
+              {dictionary?.common?.edit ?? "Edit"}
             </button>
           </Text>
         )}
@@ -195,8 +197,8 @@ const Payment = ({
             data-testid="submit-payment-button"
           >
             {!activeSession && isStripeLike(selectedPaymentMethod)
-              ? " Enter card details"
-              : "Continue to review"}
+              ? (dictionary?.checkout?.enter_card_details ?? "Enter card details")
+              : (dictionary?.checkout?.continue_to_review ?? "Continue to review")}
           </Button>
         </div>
 
@@ -205,7 +207,7 @@ const Payment = ({
             <div className="flex items-start gap-x-1 w-full">
               <div className="flex flex-col w-1/3">
                 <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                  Payment method
+                  {dictionary?.checkout?.payment_method ?? "Payment method"}
                 </Text>
                 <Text
                   className="txt-medium text-ui-fg-subtle"
@@ -217,7 +219,7 @@ const Payment = ({
               </div>
               <div className="flex flex-col w-1/3">
                 <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                  Payment details
+                  {dictionary?.checkout?.payment_details ?? "Payment details"}
                 </Text>
                 <div
                   className="flex gap-2 txt-medium text-ui-fg-subtle items-center"
@@ -231,7 +233,7 @@ const Payment = ({
                   <Text>
                     {isStripeLike(selectedPaymentMethod) && cardBrand
                       ? cardBrand
-                      : "Another step will appear"}
+                      : (dictionary?.checkout?.another_step ?? "Another step will appear")}
                   </Text>
                 </div>
               </div>

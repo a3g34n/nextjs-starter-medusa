@@ -4,13 +4,16 @@ import Overview from "@modules/account/components/overview"
 import { notFound } from "next/navigation"
 import { retrieveCustomer } from "@lib/data/customer"
 import { listOrders } from "@lib/data/orders"
+import { getDictionary } from "@lib/util/dictionary"
 
 export const metadata: Metadata = {
   title: "Account",
   description: "Overview of your account activity.",
 }
 
-export default async function OverviewTemplate() {
+export default async function OverviewTemplate(props: { params: Promise<{ countryCode: string }> }) {
+  const { countryCode } = await props.params
+  const dictionary = getDictionary(countryCode)
   const customer = await retrieveCustomer().catch(() => null)
   const orders = (await listOrders().catch(() => null)) || null
 
@@ -18,5 +21,5 @@ export default async function OverviewTemplate() {
     notFound()
   }
 
-  return <Overview customer={customer} orders={orders} />
+  return <Overview customer={customer} orders={orders} dictionary={dictionary} />
 }

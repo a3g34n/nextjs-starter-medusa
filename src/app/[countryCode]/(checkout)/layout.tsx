@@ -2,11 +2,18 @@ import LocalizedClientLink from "@modules/common/components/localized-client-lin
 import ChevronDown from "@modules/common/icons/chevron-down"
 import MedusaCTA from "@modules/layout/components/medusa-cta"
 
+// ... imports
+import { getDictionary } from "@lib/util/dictionary"
+
 export default function CheckoutLayout({
   children,
+  params,
 }: {
   children: React.ReactNode
+  params: { countryCode: string }
 }) {
+  const t = getDictionary(params.countryCode)
+
   return (
     <div className="w-full bg-white relative small:min-h-screen">
       <div className="h-16 bg-white border-b ">
@@ -18,10 +25,10 @@ export default function CheckoutLayout({
           >
             <ChevronDown className="rotate-90" size={16} />
             <span className="mt-px hidden small:block txt-compact-plus text-ui-fg-subtle hover:text-ui-fg-base ">
-              Back to shopping cart
+              {t.checkout.back_to_cart}
             </span>
             <span className="mt-px block small:hidden txt-compact-plus text-ui-fg-subtle hover:text-ui-fg-base">
-              Back
+              {t.common.back}
             </span>
           </LocalizedClientLink>
           <LocalizedClientLink
@@ -29,7 +36,7 @@ export default function CheckoutLayout({
             className="txt-compact-xlarge-plus text-ui-fg-subtle hover:text-ui-fg-base uppercase"
             data-testid="store-link"
           >
-            Medusa Store
+            {t.checkout.store_logo}
           </LocalizedClientLink>
           <div className="flex-1 basis-0" />
         </nav>

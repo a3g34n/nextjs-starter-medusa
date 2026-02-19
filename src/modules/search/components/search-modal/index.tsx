@@ -1,39 +1,35 @@
 "use client"
 
-import { useRouter } from "next/navigation"
+import { useRouter, useParams } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
 
-const SearchModal = ({ mobile }: { mobile?: boolean }) => {
+const SearchModal = ({ mobile, dictionary }: { mobile?: boolean, dictionary?: any }) => {
   const router = useRouter()
+  const params = useParams()
+  const countryCode = params?.countryCode as string
+
   const [isOpen, setIsOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
-  const inputRef = useRef<HTMLInputElement>(null)
   const modalRef = useRef<HTMLDivElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const openSearch = () => setIsOpen(true)
-  const closeSearch = () => {
-    setIsOpen(false)
-    setSearchQuery("")
-  }
+  const closeSearch = () => setIsOpen(false)
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
-    if (searchQuery.trim()) {
-      router.push(`/store?q=${encodeURIComponent(searchQuery)}`)
+    if (searchQuery) {
+      router.push(`/${countryCode}/search?q=${encodeURIComponent(searchQuery)}`)
       closeSearch()
     }
   }
 
-  // Focus input when modal opens
   useEffect(() => {
-    if (isOpen) {
-      setTimeout(() => {
-        inputRef.current?.focus()
-      }, 100)
+    if (isOpen && inputRef.current) {
+      inputRef.current.focus()
     }
   }, [isOpen])
 
-  // Close on click outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
@@ -50,7 +46,6 @@ const SearchModal = ({ mobile }: { mobile?: boolean }) => {
     }
   }, [isOpen])
 
-  // Close on escape key
   useEffect(() => {
     const handleEsc = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -76,15 +71,15 @@ const SearchModal = ({ mobile }: { mobile?: boolean }) => {
       >
         {mobile ? (
           <div className="w-full border-b border-current/30 py-2 flex items-center justify-between">
-            <span className="text-xs tracking-widest opacity-70 uppercase">Ara</span>
+            <span className="text-xs tracking-widest opacity-70 uppercase">{dictionary?.common?.search ?? "Ara"}</span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 opacity-70">
               <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
             </svg>
           </div>
         ) : (
           <>
-            <button className="text-base tracking-wide hover:opacity-80 transition-opacity">
-              ARA
+            <button className="text-base tracking-wide hover:opacity-80 transition-opacity uppercase">
+              {dictionary?.nav?.search_trigger ?? "ARA"}
             </button>
             <div className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-current opacity-100 transition-opacity duration-300 group-hover:opacity-50"></div>
           </>
@@ -103,19 +98,19 @@ const SearchModal = ({ mobile }: { mobile?: boolean }) => {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Ne aramıştınız?"
+                placeholder={dictionary?.nav?.search_placeholder ?? "Search..."}
                 className="w-full text-2xl font-light border-b-2 border-gray-200 py-4 px-2 focus:outline-none focus:border-black transition-colors bg-transparent placeholder:text-gray-300"
               />
               <button 
                 type="submit"
                 className="absolute right-2 top-1/2 -translate-y-1/2 text-sm uppercase tracking-widest hover:opacity-70"
               >
-                ARA
+                {dictionary?.nav?.search_trigger ?? "ARA"}
               </button>
             </form>
             <div className="mt-4 flex justify-between items-center text-xs text-gray-500">
-               <span>Enter'a basarak arayın</span>
-               <button onClick={closeSearch} className="hover:text-black">KAPAT (ESC)</button>
+               <span>Enter</span>
+               <button onClick={closeSearch} className="hover:text-black uppercase">{dictionary?.common?.cancel ?? "CLOSE"} (ESC)</button>
             </div>
           </div>
         </div>

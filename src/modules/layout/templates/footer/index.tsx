@@ -43,7 +43,7 @@ const TiktokIcon = () => (
   </svg>
 )
 
-export default async function Footer() {
+export default async function Footer({ dictionary }: { dictionary?: any }) {
   return (
     <footer className="bg-white w-full snap-start min-h-screen flex flex-col justify-between">
       {/* Main Footer Content */}
@@ -53,7 +53,7 @@ export default async function Footer() {
           <div className="relative">
             <input
               type="email"
-              placeholder="BÜLTENİMİZE ABONE OLUN · E-POSTA ADRESİNİZİ GİRİN*"
+              placeholder={dictionary?.footer?.newsletter_placeholder ?? "BÜLTENİMİZE ABONE OLUN · E-POSTA ADRESİNİZİ GİRİN*"}
               className="w-full border-b border-gray-300 py-3 text-sm text-center text-gray-600 placeholder:text-gray-400 focus:outline-none focus:border-gray-600 transition-colors bg-transparent"
             />
             <button className="absolute right-0 top-1/2 -translate-y-1/2 w-8 h-8 border border-gray-400 rounded-full flex items-center justify-center hover:border-gray-600 transition-colors">
@@ -68,7 +68,7 @@ export default async function Footer() {
         <div className="flex flex-col sm:flex-row items-center gap-12 mb-16">
           {/* Social Links */}
           <div className="text-center">
-            <p className="text-xs text-gray-600 mb-4">Bizi takip edin</p>
+            <p className="text-xs text-gray-600 mb-4">{dictionary?.footer?.follow_us ?? "Bizi takip edin"}</p>
             <div className="flex items-center gap-4">
               <a href="https://facebook.com" className="text-gray-700 hover:text-gray-900 transition-colors" target="_blank" rel="noopener noreferrer"><FacebookIcon /></a>
               <a href="https://instagram.com" className="text-gray-700 hover:text-gray-900 transition-colors" target="_blank" rel="noopener noreferrer"><InstagramIcon /></a>
@@ -82,10 +82,10 @@ export default async function Footer() {
 
           {/* App QR Code */}
           <div className="text-center">
-            <p className="text-xs text-gray-600 mb-4">Uygulamamızı indirin</p>
+            <p className="text-xs text-gray-600 mb-4">{dictionary?.footer?.download_app ?? "Uygulamamızı indirin"}</p>
             <div className="w-24 h-24 bg-gray-100 border border-gray-200 flex items-center justify-center">
               {/* Placeholder for QR code */}
-              <span className="text-xs text-gray-400">QR</span>
+              <span className="text-xs text-gray-400">{dictionary?.footer?.qr_code ?? "QR"}</span>
             </div>
           </div>
         </div>
@@ -94,35 +94,35 @@ export default async function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-16 text-center mb-16">
           {/* Policies */}
           <div>
-            <h3 className="text-xs font-medium tracking-wider mb-4 underline underline-offset-4">POLİTİKALAR</h3>
+            <h3 className="text-xs font-medium tracking-wider mb-4 underline underline-offset-4">{dictionary?.footer?.policies ?? "POLİTİKALAR"}</h3>
             <ul className="space-y-2 text-xs text-gray-600">
-              <li><LocalizedClientLink href="/content/terms" className="hover:text-gray-900 transition-colors">SATIN ALMA KOŞULLARI</LocalizedClientLink></li>
-              <li><LocalizedClientLink href="/content/privacy" className="hover:text-gray-900 transition-colors">GİZLİLİK POLİTİKASI</LocalizedClientLink></li>
-              <li><LocalizedClientLink href="/content/cookies" className="hover:text-gray-900 transition-colors">ÇEREZ POLİTİKASI</LocalizedClientLink></li>
-              <li><LocalizedClientLink href="/content/cookies-settings" className="hover:text-gray-900 transition-colors">TANIMLAMA BİLGİSİ AYARLARI</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/content/terms" className="hover:text-gray-900 transition-colors">{dictionary?.footer?.purchase_terms ?? "SATIN ALMA KOŞULLARI"}</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/content/privacy" className="hover:text-gray-900 transition-colors">{dictionary?.footer?.privacy ?? "GİZLİLİK POLİTİKASI"}</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/content/cookies" className="hover:text-gray-900 transition-colors">{dictionary?.footer?.cookie_policy ?? "ÇEREZ POLİTİKASI"}</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/content/cookies-settings" className="hover:text-gray-900 transition-colors">{dictionary?.footer?.cookie_settings ?? "TANIMLAMA BİLGİSİ AYARLARI"}</LocalizedClientLink></li>
             </ul>
           </div>
 
           {/* Company */}
           <div>
-            <h3 className="text-xs font-medium tracking-wider mb-4 underline underline-offset-4">ŞİRKET</h3>
+            <h3 className="text-xs font-medium tracking-wider mb-4 underline underline-offset-4">{dictionary?.footer?.company ?? "ŞİRKET"}</h3>
             <ul className="space-y-2 text-xs text-gray-600">
-              <li><LocalizedClientLink href="/content/careers" className="hover:text-gray-900 transition-colors">BİZİMLE ÇALIŞIN</LocalizedClientLink></li>
-              <li><LocalizedClientLink href="/content/press" className="hover:text-gray-900 transition-colors">BASIN</LocalizedClientLink></li>
-              <li><LocalizedClientLink href="/store" className="hover:text-gray-900 transition-colors">MAĞAZA HİS</LocalizedClientLink></li>
-              <li><LocalizedClientLink href="/content/about" className="hover:text-gray-900 transition-colors">HAKKIMIZDA</LocalizedClientLink></li>
-              <li><LocalizedClientLink href="/sitemap" className="hover:text-gray-900 transition-colors">SİTE HARİTASI</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/content/careers" className="hover:text-gray-900 transition-colors">{dictionary?.footer?.careers ?? "BİZİMLE ÇALIŞIN"}</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/content/press" className="hover:text-gray-900 transition-colors">{dictionary?.footer?.press ?? "BASIN"}</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/store" className="hover:text-gray-900 transition-colors">{dictionary?.footer?.store_feel ?? "MAĞAZA HİS"}</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/content/about" className="hover:text-gray-900 transition-colors">{dictionary?.footer?.about ?? "HAKKIMIZDA"}</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/sitemap" className="hover:text-gray-900 transition-colors">{dictionary?.footer?.sitemap ?? "SİTE HARİTASI"}</LocalizedClientLink></li>
             </ul>
           </div>
 
           {/* Contact */}
           <div>
-            <h3 className="text-xs font-medium tracking-wider mb-4 underline underline-offset-4">İLETİŞİM</h3>
+            <h3 className="text-xs font-medium tracking-wider mb-4 underline underline-offset-4">{dictionary?.footer?.contact_title ?? "İLETİŞİM"}</h3>
             <ul className="space-y-2 text-xs text-gray-600">
-              <li><LocalizedClientLink href="/contact" className="hover:text-gray-900 transition-colors">İLETİŞİM</LocalizedClientLink></li>
-              <li><LocalizedClientLink href="/faq" className="hover:text-gray-900 transition-colors">YARDIM</LocalizedClientLink></li>
-              <li><LocalizedClientLink href="/checkout" className="hover:text-gray-900 transition-colors">MİSAFİR OLARAK ALIŞVERİŞ YAP</LocalizedClientLink></li>
-              <li><LocalizedClientLink href="/store-locations" className="hover:text-gray-900 transition-colors">MAĞAZALAR</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/contact" className="hover:text-gray-900 transition-colors">{dictionary?.footer?.contact ?? "İLETİŞİM"}</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/faq" className="hover:text-gray-900 transition-colors">{dictionary?.footer?.help ?? "YARDIM"}</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/checkout" className="hover:text-gray-900 transition-colors">{dictionary?.footer?.guest_checkout ?? "MİSAFİR OLARAK ALIŞVERİŞ YAP"}</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/store-locations" className="hover:text-gray-900 transition-colors">{dictionary?.footer?.stores ?? "MAĞAZALAR"}</LocalizedClientLink></li>
               <li className="font-medium text-gray-900">00800448828295</li>
             </ul>
           </div>
@@ -135,7 +135,7 @@ export default async function Footer() {
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
           </svg>
-          <span>TÜRKİYE / TÜRKÇE</span>
+          <span>{dictionary?.footer?.country_language ?? "TÜRKİYE / TÜRKÇE"}</span>
         </div>
       </div>
 

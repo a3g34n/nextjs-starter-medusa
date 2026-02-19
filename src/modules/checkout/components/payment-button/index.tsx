@@ -11,11 +11,13 @@ import ErrorMessage from "../error-message"
 type PaymentButtonProps = {
   cart: HttpTypes.StoreCart
   "data-testid": string
+  dictionary?: any
 }
 
 const PaymentButton: React.FC<PaymentButtonProps> = ({
   cart,
   "data-testid": dataTestId,
+  dictionary,
 }) => {
   const notReady =
     !cart ||
@@ -33,14 +35,15 @@ const PaymentButton: React.FC<PaymentButtonProps> = ({
           notReady={notReady}
           cart={cart}
           data-testid={dataTestId}
+          dictionary={dictionary}
         />
       )
     case isManual(paymentSession?.provider_id):
       return (
-        <ManualTestPaymentButton notReady={notReady} data-testid={dataTestId} />
+        <ManualTestPaymentButton notReady={notReady} data-testid={dataTestId} dictionary={dictionary} />
       )
     default:
-      return <Button disabled>Select a payment method</Button>
+      return <Button disabled>{dictionary?.checkout?.select_payment_method ?? "Select a payment method"}</Button>
   }
 }
 
@@ -48,10 +51,12 @@ const StripePaymentButton = ({
   cart,
   notReady,
   "data-testid": dataTestId,
+  dictionary,
 }: {
   cart: HttpTypes.StoreCart
   notReady: boolean
   "data-testid"?: string
+  dictionary?: any
 }) => {
   const [submitting, setSubmitting] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
@@ -141,7 +146,7 @@ const StripePaymentButton = ({
         isLoading={submitting}
         data-testid={dataTestId}
       >
-        Place order
+        {dictionary?.checkout?.place_order ?? "Place order"}
       </Button>
       <ErrorMessage
         error={errorMessage}
@@ -151,7 +156,7 @@ const StripePaymentButton = ({
   )
 }
 
-const ManualTestPaymentButton = ({ notReady }: { notReady: boolean }) => {
+const ManualTestPaymentButton = ({ notReady, dictionary }: { notReady: boolean, dictionary?: any }) => {
   const [submitting, setSubmitting] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
@@ -180,7 +185,7 @@ const ManualTestPaymentButton = ({ notReady }: { notReady: boolean }) => {
         size="large"
         data-testid="submit-order-button"
       >
-        Place order
+        {dictionary?.checkout?.place_order ?? "Place order"}
       </Button>
       <ErrorMessage
         error={errorMessage}

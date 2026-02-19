@@ -7,27 +7,37 @@ import { HttpTypes } from "@medusajs/types"
 import { Locale } from "@lib/data/locales"
 import { useHeaderHover } from "@lib/context/header-hover-context"
 
-// Working sidebar items from original starter
-const SideMenuItems = [
-  { name: "Ana Sayfa", href: "/" },
-  { name: "Mağaza", href: "/store" },
-  { name: "Hesabım", href: "/account" },
-  { name: "Sepetim", href: "/cart" },
-]
-
-const bottomLinks = [
-  { name: "+INFO", href: "/info" },
-  { name: "YARDIM", href: "/help" },
-]
+// ... imports
 
 type SideMenuProps = {
   regions: HttpTypes.StoreRegion[] | null
   locales: Locale[] | null
   currentLocale: string | null
+  dictionary: any // TODO: Type this properly
 }
 
-const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
+const SideMenu = ({ regions, locales, currentLocale, dictionary }: SideMenuProps) => {
   const [isOpen, setIsOpen] = useState(false)
+  
+  // Define items using dictionary
+  // Fallback for missing keys (Home/Store)
+  const homeText = currentLocale?.startsWith("tr") ? "Ana Sayfa" : "Home"
+  const storeText = currentLocale?.startsWith("tr") ? "Mağaza" : "Store"
+  
+  const SideMenuItems = [
+    { name: homeText, href: "/" },
+    { name: storeText, href: "/store" },
+    { name: dictionary.nav.account, href: "/account" },
+    { name: dictionary.nav.cart, href: "/cart" },
+  ]
+
+  const bottomLinks = [
+    { name: "+INFO", href: "/info" },
+    { name: dictionary.nav.help, href: "/yardim" },
+  ]
+
+  // ... rest of component logic ...
+  // Keeping `const [mounted, setMounted]...`
   const [mounted, setMounted] = useState(false)
   const { setNavHovered } = useHeaderHover()
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -40,6 +50,7 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
       }
     }
   }, [])
+// ... rest matches original until render ...
 
   // Sync sidebar state with header hover state
   useEffect(() => {

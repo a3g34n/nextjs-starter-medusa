@@ -9,7 +9,13 @@ export const metadata: Metadata = {
   description: "View your cart",
 }
 
-export default async function Cart() {
+import { getDictionary } from "@lib/util/dictionary"
+
+export default async function Cart(props: { params: Promise<{ countryCode: string }> }) {
+  const params = await props.params
+  const { countryCode } = params
+  const dictionary = getDictionary(countryCode)
+
   const cart = await retrieveCart().catch((error) => {
     console.error(error)
     return notFound()
@@ -17,5 +23,5 @@ export default async function Cart() {
 
   const customer = await retrieveCustomer()
 
-  return <CartTemplate cart={cart} customer={customer} />
+  return <CartTemplate cart={cart} customer={customer} dictionary={dictionary} />
 }

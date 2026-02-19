@@ -3,6 +3,7 @@ import Hero from "@modules/home/components/hero"
 import FullscreenSection from "@modules/home/components/fullscreen-section"
 import CategoryNav from "@modules/home/components/category-nav"
 import Footer from "@modules/layout/templates/footer"
+import { getDictionary } from "@lib/util/dictionary"
 
 export const metadata: Metadata = {
   title: "LOUNJSTUDIO | Premium Home & Living",
@@ -12,6 +13,10 @@ export const metadata: Metadata = {
 export default async function Home(props: {
   params: Promise<{ countryCode: string }>
 }) {
+  const params = await props.params
+  const { countryCode } = params
+  const dictionary = getDictionary(countryCode)
+
   return (
     <main className="h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth no-scrollbar">
       {/* Section 1: Video Hero with İNDİRİM */}
@@ -36,7 +41,7 @@ export default async function Home(props: {
 
       {/* Section 4: Footer */}
       <div id="footer">
-        <Footer />
+        <Footer dictionary={dictionary} />
       </div>
     </main>
   )

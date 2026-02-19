@@ -13,7 +13,12 @@ export const metadata: Metadata = {
   metadataBase: new URL(getBaseURL()),
 }
 
-export default async function PageLayout(props: { children: React.ReactNode }) {
+import { getDictionary } from "@lib/util/dictionary"
+
+export default async function PageLayout(props: { children: React.ReactNode; params: Promise<{ countryCode: string }> }) {
+  const params = await props.params
+  const { countryCode } = params
+  const dictionary = getDictionary(countryCode)
   const customer = await retrieveCustomer()
   const cart = await retrieveCart()
   let shippingOptions: StoreCartShippingOption[] = []
@@ -26,7 +31,7 @@ export default async function PageLayout(props: { children: React.ReactNode }) {
 
   return (
     <HeaderHoverProvider>
-      <Nav />
+      <Nav dictionary={dictionary} countryCode={countryCode} />
       {customer && cart && (
         <CartMismatchBanner customer={customer} cart={cart} />
       )}
