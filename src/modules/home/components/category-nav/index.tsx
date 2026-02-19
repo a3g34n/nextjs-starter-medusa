@@ -53,12 +53,12 @@ const CategoryNav = () => {
 
   return (
     <div className={`fixed bottom-16 left-0 right-0 z-40 transition-opacity duration-300 ${isVisible ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
-      <nav className="flex items-center justify-center gap-8">
+      <nav className="flex items-center justify-center gap-4 md:gap-8">
         {categories.map((category, index) => (
           <button
             key={category.name}
             onClick={() => handleClick(category.sectionId)}
-            className={`text-sm tracking-wider transition-all duration-300 ${
+            className={`text-xs md:text-sm tracking-wider transition-all duration-300 ${
               index === activeIndex
                 ? "text-white font-medium scale-110"
                 : "text-white/60 hover:text-white/80"

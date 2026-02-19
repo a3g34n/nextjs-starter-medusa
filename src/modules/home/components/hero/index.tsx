@@ -11,7 +11,7 @@ const Hero = () => {
         loop
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover object-[25%_center] md:object-center"
         poster="/hero-poster.jpg"
       >
         {/* Add your video sources here */}

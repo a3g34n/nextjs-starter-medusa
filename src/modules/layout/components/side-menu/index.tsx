@@ -98,24 +98,40 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
 
   return (
     <div className="h-full flex items-center">
-      {/* Trigger area - hamburger icon and logo */}
+      {/* Trigger area - hamburger or close icon */}
       <div
-        className="h-full flex items-center gap-x-6"
+        className="h-full flex items-center gap-x-6 cursor-pointer"
         onMouseEnter={open}
         onMouseLeave={scheduleClose}
-        onClick={open}
       >
-        {/* Three-line hamburger icon - hidden when sidebar is open */}
-        {!isOpen && (
-          <button
-            data-testid="nav-menu-button"
-            className="relative h-full flex items-center transition-all ease-out duration-300 focus:outline-none hover:opacity-80"
-          >
-            <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
-        )}
+        <button
+          data-testid="nav-menu-button"
+          className="relative h-full flex items-center transition-all ease-out duration-300 focus:outline-none hover:opacity-80"
+          onClick={isOpen ? close : open}
+        >
+          {/* Mobile: Show X if open, Hamburger if closed. Desktop: Show Hamburger if closed, nothing if open (logo shifts) */}
+          <div className="md:hidden">
+            {isOpen ? (
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+              </svg>
+            ) : (
+              <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            )}
+          </div>
+          
+          {/* Desktop: Only Hamburger when closed */}
+          <div className="hidden md:block">
+            {!isOpen && (
+              <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            )}
+          </div>
+        </button>
+        
         {/* Logo */}
         <LocalizedClientLink
           href="/"
@@ -127,27 +143,21 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
         </LocalizedClientLink>
       </div>
 
-      {/* Full navbar hover zone - keeps sidebar open when hovering anywhere on navbar */}
+      {/* Desktop: Full navbar hover zone - keeps sidebar open when hovering anywhere on navbar */}
       {isOpen && (
         <div
-          className="fixed left-0 top-0 z-45"
+          className="hidden md:block fixed left-0 top-0 z-45"
           style={{
             width: '100vw',
             height: '80px',
             backgroundColor: 'transparent',
-            pointerEvents: 'none', // Don't block clicks on navbar items
+            pointerEvents: 'none',
           }}
           onMouseEnter={cancelClose}
         >
-          {/* Active hover zone on the left side only */}
           <div 
             style={{
-              position: 'absolute',
-              left: 0,
-              top: 0,
-              width: '400px', // Wide enough to cover logo + some buffer
-              height: '100%',
-              pointerEvents: 'auto',
+              position: 'absolute', left: 0, top: 0, width: '400px', height: '100%', pointerEvents: 'auto',
             }}
             onMouseEnter={open}
             onMouseLeave={scheduleClose}
@@ -155,29 +165,26 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
         </div>
       )}
 
-      {/* Backdrop - closes sidebar when clicking/hovering on right side of page */}
+      {/* Desktop: Backdrop to close on right side hover */}
       {isOpen && (
         <div
-          className="fixed z-40"
+          className="hidden md:block fixed z-40"
           style={{ 
-            left: '288px',
-            top: '80px', // Below navbar
-            right: 0,
-            bottom: 0,
-            backgroundColor: 'transparent' 
+            left: '288px', top: '80px', right: 0, bottom: 0, backgroundColor: 'transparent' 
           }}
           onMouseEnter={close}
           data-testid="side-menu-backdrop"
         />
       )}
 
-      {/* Side Panel - Light/White design */}
+      {/* Side Panel */}
       <div
         data-darkreader-ignore="true"
-        className="fixed left-0 top-20 w-72 z-50 overflow-y-auto transition-transform duration-300 ease-out"
+        className={`fixed bg-white overflow-y-auto transition-transform duration-300 ease-out
+          inset-0 z-[-1] pt-[160px] md:pt-0
+          md:top-20 md:left-0 md:bottom-0 md:w-96 md:h-[calc(100vh-80px)] md:z-50
+        `}
         style={{
-          height: 'calc(100vh - 80px)',
-          backgroundColor: '#ffffff',
           transform: isOpen ? 'translateX(0)' : 'translateX(-100%)',
         }}
         onMouseEnter={open}
@@ -186,8 +193,7 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
         <div
           data-testid="nav-menu-popup"
           data-darkreader-ignore="true"
-          className="flex flex-col h-full py-8 px-8"
-          style={{ backgroundColor: '#ffffff' }}
+          className="flex flex-col h-full px-8 pb-8 md:py-8"
         >
           {/* Main Menu Items */}
           <div className="flex-1 space-y-6">

@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import CategoryNav from "@modules/home/components/category-nav"
+
 
 interface FullscreenSectionProps {
   sectionId: string
@@ -27,7 +27,7 @@ const FullscreenSection = ({
             src={singleImageSrc}
             alt="Section background"
             fill
-            className="object-cover"
+            className="object-cover object-[25%_center] md:object-center"
             priority
           />
         </div>
@@ -66,11 +66,6 @@ const FullscreenSection = ({
 
       {/* Dark overlay for text contrast */}
       <div className="absolute inset-0 bg-black/10" />
-
-      {/* Bottom Category Navigation */}
-      <div className="absolute bottom-8 left-0 right-0 z-10">
-        <CategoryNav activeIndex={activeIndex} />
-      </div>
     </section>
   )
 }

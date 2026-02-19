@@ -19,7 +19,7 @@ export default function NavClient({ children }: { children: React.ReactNode }) {
       onMouseLeave={() => setNavHovered(false)}
     >
       <header className={clx(
-        "relative h-20 mx-auto duration-300 transition-all",
+        "relative h-auto md:h-20 mx-auto duration-300 transition-all",
         isHovered ? "bg-white" : "bg-transparent"
       )}>
         <nav
