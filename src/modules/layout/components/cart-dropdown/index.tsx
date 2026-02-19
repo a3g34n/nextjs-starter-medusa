@@ -80,7 +80,7 @@ const CartDropdown = ({
       onMouseLeave={close}
     >
       <Popover className="relative h-full">
-        <PopoverButton className="h-full">
+        <div className="h-full flex items-center">
           <LocalizedClientLink
             className="hover:opacity-80 transition-opacity flex items-center gap-2 text-sm tracking-wide"
             href="/cart"
@@ -91,7 +91,7 @@ const CartDropdown = ({
             </svg>
             {`SEPET (${totalItems})`}
           </LocalizedClientLink>
-        </PopoverButton>
+        </div>
         <Transition
           show={cartDropdownOpen}
           as={Fragment}

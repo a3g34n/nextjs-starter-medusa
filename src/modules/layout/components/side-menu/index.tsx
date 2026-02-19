@@ -5,6 +5,7 @@ import { useState, useRef, useEffect } from "react"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { HttpTypes } from "@medusajs/types"
 import { Locale } from "@lib/data/locales"
+import { useHeaderHover } from "@lib/context/header-hover-context"
 
 // Working sidebar items from original starter
 const SideMenuItems = [
@@ -28,6 +29,7 @@ type SideMenuProps = {
 const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
+  const { setNavHovered } = useHeaderHover()
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
@@ -38,6 +40,18 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
       }
     }
   }, [])
+
+  // Sync sidebar state with header hover state
+  useEffect(() => {
+    if (isOpen) {
+      setNavHovered(true)
+    } else {
+      // When sidebar closes, we reset hover state. 
+      // If the mouse is actually still on the navbar, NavClient's events should handle it,
+      // but explicitly setting false here handles the "mouse left to void" case.
+      setNavHovered(false)
+    }
+  }, [isOpen, setNavHovered])
 
   const cancelClose = () => {
     if (timeoutRef.current) {
@@ -89,6 +103,7 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
         className="h-full flex items-center gap-x-6"
         onMouseEnter={open}
         onMouseLeave={scheduleClose}
+        onClick={open}
       >
         {/* Three-line hamburger icon - hidden when sidebar is open */}
         {!isOpen && (
@@ -104,8 +119,9 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
         {/* Logo */}
         <LocalizedClientLink
           href="/"
-          className="text-2xl sm:text-3xl font-light tracking-[0.2em] hover:opacity-80 transition-all duration-300 uppercase"
+          className="text-2xl sm:text-3xl font-light tracking-[0.2em] hover:opacity-80 transition-all duration-300 uppercase relative z-50"
           data-testid="nav-store-link"
+          onClick={close}
         >
           LOUNJSTUDIO
         </LocalizedClientLink>

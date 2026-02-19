@@ -79,6 +79,7 @@ export const listProducts = async ({
           products,
           count,
         },
+       // No changes needed for products.ts if we pass q via queryParams
         nextPage: nextPage,
         queryParams,
       }

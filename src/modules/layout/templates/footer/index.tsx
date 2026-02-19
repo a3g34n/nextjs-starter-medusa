@@ -9,7 +9,7 @@ const FacebookIcon = () => (
 
 const InstagramIcon = () => (
   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
   </svg>
 )
 
@@ -70,13 +70,13 @@ export default async function Footer() {
           <div className="text-center">
             <p className="text-xs text-gray-600 mb-4">Bizi takip edin</p>
             <div className="flex items-center gap-4">
-              <a href="#" className="text-gray-700 hover:text-gray-900 transition-colors"><FacebookIcon /></a>
-              <a href="#" className="text-gray-700 hover:text-gray-900 transition-colors"><InstagramIcon /></a>
-              <a href="#" className="text-gray-700 hover:text-gray-900 transition-colors"><PinterestIcon /></a>
-              <a href="#" className="text-gray-700 hover:text-gray-900 transition-colors"><YoutubeIcon /></a>
-              <a href="#" className="text-gray-700 hover:text-gray-900 transition-colors"><XIcon /></a>
-              <a href="#" className="text-gray-700 hover:text-gray-900 transition-colors"><SpotifyIcon /></a>
-              <a href="#" className="text-gray-700 hover:text-gray-900 transition-colors"><TiktokIcon /></a>
+              <a href="https://facebook.com" className="text-gray-700 hover:text-gray-900 transition-colors" target="_blank" rel="noopener noreferrer"><FacebookIcon /></a>
+              <a href="https://instagram.com" className="text-gray-700 hover:text-gray-900 transition-colors" target="_blank" rel="noopener noreferrer"><InstagramIcon /></a>
+              <a href="https://pinterest.com" className="text-gray-700 hover:text-gray-900 transition-colors" target="_blank" rel="noopener noreferrer"><PinterestIcon /></a>
+              <a href="https://youtube.com" className="text-gray-700 hover:text-gray-900 transition-colors" target="_blank" rel="noopener noreferrer"><YoutubeIcon /></a>
+              <a href="https://x.com" className="text-gray-700 hover:text-gray-900 transition-colors" target="_blank" rel="noopener noreferrer"><XIcon /></a>
+              <a href="https://spotify.com" className="text-gray-700 hover:text-gray-900 transition-colors" target="_blank" rel="noopener noreferrer"><SpotifyIcon /></a>
+              <a href="https://tiktok.com" className="text-gray-700 hover:text-gray-900 transition-colors" target="_blank" rel="noopener noreferrer"><TiktokIcon /></a>
             </div>
           </div>
 
@@ -96,10 +96,10 @@ export default async function Footer() {
           <div>
             <h3 className="text-xs font-medium tracking-wider mb-4 underline underline-offset-4">POLİTİKALAR</h3>
             <ul className="space-y-2 text-xs text-gray-600">
-              <li><a href="#" className="hover:text-gray-900 transition-colors">SATIN ALMA KOŞULLARI</a></li>
-              <li><a href="#" className="hover:text-gray-900 transition-colors">GİZLİLİK POLİTİKASI</a></li>
-              <li><a href="#" className="hover:text-gray-900 transition-colors">ÇEREZ POLİTİKASI</a></li>
-              <li><a href="#" className="hover:text-gray-900 transition-colors">TANIMLAMA BİLGİSİ AYARLARI</a></li>
+              <li><LocalizedClientLink href="/content/terms" className="hover:text-gray-900 transition-colors">SATIN ALMA KOŞULLARI</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/content/privacy" className="hover:text-gray-900 transition-colors">GİZLİLİK POLİTİKASI</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/content/cookies" className="hover:text-gray-900 transition-colors">ÇEREZ POLİTİKASI</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/content/cookies-settings" className="hover:text-gray-900 transition-colors">TANIMLAMA BİLGİSİ AYARLARI</LocalizedClientLink></li>
             </ul>
           </div>
 
@@ -107,11 +107,11 @@ export default async function Footer() {
           <div>
             <h3 className="text-xs font-medium tracking-wider mb-4 underline underline-offset-4">ŞİRKET</h3>
             <ul className="space-y-2 text-xs text-gray-600">
-              <li><a href="#" className="hover:text-gray-900 transition-colors">BİZİMLE ÇALIŞIN</a></li>
-              <li><a href="#" className="hover:text-gray-900 transition-colors">BASIN</a></li>
-              <li><a href="#" className="hover:text-gray-900 transition-colors">MAĞAZA HİS</a></li>
-              <li><a href="#" className="hover:text-gray-900 transition-colors">HAKKIMIZDA</a></li>
-              <li><a href="#" className="hover:text-gray-900 transition-colors">SİTE HARİTASI</a></li>
+              <li><LocalizedClientLink href="/content/careers" className="hover:text-gray-900 transition-colors">BİZİMLE ÇALIŞIN</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/content/press" className="hover:text-gray-900 transition-colors">BASIN</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/store" className="hover:text-gray-900 transition-colors">MAĞAZA HİS</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/content/about" className="hover:text-gray-900 transition-colors">HAKKIMIZDA</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/sitemap" className="hover:text-gray-900 transition-colors">SİTE HARİTASI</LocalizedClientLink></li>
             </ul>
           </div>
 
@@ -119,10 +119,10 @@ export default async function Footer() {
           <div>
             <h3 className="text-xs font-medium tracking-wider mb-4 underline underline-offset-4">İLETİŞİM</h3>
             <ul className="space-y-2 text-xs text-gray-600">
-              <li><a href="#" className="hover:text-gray-900 transition-colors">İLETİŞİM</a></li>
-              <li><a href="#" className="hover:text-gray-900 transition-colors">YARDIM</a></li>
-              <li><a href="#" className="hover:text-gray-900 transition-colors">MİSAFİR OLARAK ALIŞVERİŞ YAP</a></li>
-              <li><a href="#" className="hover:text-gray-900 transition-colors">MAĞAZALAR</a></li>
+              <li><LocalizedClientLink href="/contact" className="hover:text-gray-900 transition-colors">İLETİŞİM</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/faq" className="hover:text-gray-900 transition-colors">YARDIM</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/checkout" className="hover:text-gray-900 transition-colors">MİSAFİR OLARAK ALIŞVERİŞ YAP</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/store-locations" className="hover:text-gray-900 transition-colors">MAĞAZALAR</LocalizedClientLink></li>
               <li className="font-medium text-gray-900">00800448828295</li>
             </ul>
           </div>

@@ -7,13 +7,17 @@ import { StoreRegion } from "@medusajs/types"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import CartButton from "@modules/layout/components/cart-button"
 import SideMenu from "@modules/layout/components/side-menu"
+import SearchModal from "@modules/search/components/search-modal"
 import NavClient from "./nav-client"
 
+import { retrieveCustomer } from "@lib/data/customer"
+
 export default async function Nav() {
-  const [regions, locales, currentLocale] = await Promise.all([
+  const [regions, locales, currentLocale, customer] = await Promise.all([
     listRegions().then((regions: StoreRegion[]) => regions),
     listLocales(),
     getLocale(),
+    retrieveCustomer(),
   ])
 
   return (
@@ -30,10 +34,7 @@ export default async function Nav() {
       {/* Center: Search */}
       <div className="flex items-center h-full">
         <div className="relative">
-          <span className="text-base tracking-wide cursor-pointer hover:opacity-80 transition-opacity">
-            ARA
-          </span>
-          <div className="absolute bottom-0 left-0 right-0 h-px bg-current opacity-50 transition-colors duration-300 group-hover:bg-gray-400"></div>
+            <SearchModal />
         </div>
       </div>
 
@@ -58,7 +59,7 @@ export default async function Nav() {
                 d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
               />
             </svg>
-            OTURUMU BAŞLAT
+            {customer ? (customer.first_name ? `MERHABA, ${customer.first_name.toUpperCase()}` : "HESABIM") : "OTURUMU BAŞLAT"}
           </LocalizedClientLink>
           <span className="hover:opacity-80 transition-opacity flex items-center gap-2 cursor-pointer">
             <svg
