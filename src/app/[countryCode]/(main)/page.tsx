@@ -1,6 +1,7 @@
 import { Metadata } from "next"
 import Hero from "@modules/home/components/hero"
 import FullscreenSection from "@modules/home/components/fullscreen-section"
+import CategoryNav from "@modules/home/components/category-nav"
 import Footer from "@modules/layout/templates/footer"
 
 export const metadata: Metadata = {
@@ -30,8 +31,13 @@ export default async function Home(props: {
         activeIndex={2}
       />
 
+      {/* Sticky Navigation Overlay */}
+      <CategoryNav />
+
       {/* Section 4: Footer */}
-      <Footer />
+      <div id="footer">
+        <Footer />
+      </div>
     </main>
   )
 }

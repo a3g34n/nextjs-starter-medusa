@@ -1,6 +1,6 @@
 "use client"
 
-import CategoryNav from "@modules/home/components/category-nav"
+
 
 const Hero = () => {
   return (
@@ -32,12 +32,10 @@ const Hero = () => {
         </h1>
       </div>
 
-      {/* Bottom Category Navigation */}
-      <div className="absolute bottom-8 left-0 right-0 z-10">
+      <div className="absolute bottom-8 left-0 right-0 z-10 pointer-events-none">
         <p className="text-center text-white/70 text-xs mb-4 px-4">
           İndirim 1 Ocak 20:00'da online'da başlayıp 2 Mart'ta bitiyor. İndirim seçili ürünlerde stoklarla sınırlıdır.
         </p>
-        <CategoryNav activeIndex={0} />
       </div>
     </section>
   )
