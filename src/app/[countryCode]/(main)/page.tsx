@@ -1,41 +1,37 @@
 import { Metadata } from "next"
-
-import FeaturedProducts from "@modules/home/components/featured-products"
 import Hero from "@modules/home/components/hero"
-import { listCollections } from "@lib/data/collections"
-import { getRegion } from "@lib/data/regions"
+import FullscreenSection from "@modules/home/components/fullscreen-section"
+import Footer from "@modules/layout/templates/footer"
 
 export const metadata: Metadata = {
-  title: "Medusa Next.js Starter Template",
-  description:
-    "A performant frontend ecommerce starter template with Next.js 15 and Medusa.",
+  title: "LOUNJSTUDIO | Premium Home & Living",
+  description: "Eviniz için premium ev ve yaşam ürünleri. Özel koleksiyonlar ve indirimler.",
 }
 
 export default async function Home(props: {
   params: Promise<{ countryCode: string }>
 }) {
-  const params = await props.params
-
-  const { countryCode } = params
-
-  const region = await getRegion(countryCode)
-
-  const { collections } = await listCollections({
-    fields: "id, handle, title",
-  })
-
-  if (!collections || !region) {
-    return null
-  }
-
   return (
-    <>
+    <main className="h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth no-scrollbar">
+      {/* Section 1: Video Hero with İNDİRİM */}
       <Hero />
-      <div className="py-12">
-        <ul className="flex flex-col gap-x-6">
-          <FeaturedProducts collections={collections} region={region} />
-        </ul>
-      </div>
-    </>
+
+      {/* Section 2: YENİLER - Single Full Image */}
+      <FullscreenSection
+        sectionId="section-yeniler"
+        singleImageSrc="/images/section-2.jpg"
+        activeIndex={1}
+      />
+
+      {/* Section 3: KOLEKSİYON - Living Room */}
+      <FullscreenSection
+        sectionId="section-koleksiyon"
+        singleImageSrc="/images/section-3.jpg"
+        activeIndex={2}
+      />
+
+      {/* Section 4: Footer */}
+      <Footer />
+    </main>
   )
 }

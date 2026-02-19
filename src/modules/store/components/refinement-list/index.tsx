@@ -1,7 +1,7 @@
 "use client"
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { useCallback } from "react"
+import { useCallback, useState } from "react"
 
 import SortProducts, { SortOptions } from "./sort-products"
 
@@ -31,9 +31,26 @@ const RefinementList = ({ sortBy, 'data-testid': dataTestId }: RefinementListPro
     router.push(`${pathname}?${query}`)
   }
 
+  const [showFilters, setShowFilters] = useState(false)
+
+  const toggleFilters = () => setShowFilters((prev) => !prev)
+
   return (
-    <div className="flex small:flex-col gap-12 py-4 mb-8 small:px-0 pl-6 small:min-w-[250px] small:ml-[1.675rem]">
-      <SortProducts sortBy={sortBy} setQueryParams={setQueryParams} data-testid={dataTestId} />
+    <div className="flex items-center gap-6 relative">
+      <button 
+         onClick={toggleFilters}
+         className={`text-xs tracking-widest uppercase hover:text-gray-600 transition-colors ${showFilters ? "text-black font-semibold" : "text-gray-500"}`}
+      >
+        SIRALA
+      </button>
+      
+      {showFilters && (
+        <div className="absolute right-0 top-full mt-2 bg-white shadow-lg border border-gray-100 p-4 rounded-md z-50 min-w-[200px] animate-fadeIn">
+            <div className="flex flex-col gap-2">
+                 <SortProducts sortBy={sortBy} setQueryParams={setQueryParams} data-testid={dataTestId} />
+            </div>
+        </div>
+      )}
     </div>
   )
 }

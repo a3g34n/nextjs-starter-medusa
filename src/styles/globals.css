@@ -47,6 +47,23 @@
   input[type="search"]::-webkit-search-results-decoration {
     -webkit-appearance: none;
   }
+
+  /* Scroll snap utilities */
+  .snap-y {
+    scroll-snap-type: y mandatory;
+  }
+
+  .snap-mandatory {
+    scroll-snap-type: y mandatory;
+  }
+
+  .snap-start {
+    scroll-snap-align: start;
+  }
+
+  .scroll-smooth {
+    scroll-behavior: smooth;
+  }
 }
 
 @layer components {
