@@ -47,8 +47,6 @@ export default async function Footer({ dictionary }: { dictionary?: any }) {
             <ul className="space-y-2 text-xs text-gray-600">
               <li><LocalizedClientLink href="/content/terms" className="hover:text-gray-900 transition-colors">{dictionary?.footer?.purchase_terms ?? "SATIN ALMA KOŞULLARI"}</LocalizedClientLink></li>
               <li><LocalizedClientLink href="/content/privacy" className="hover:text-gray-900 transition-colors">{dictionary?.footer?.privacy ?? "GİZLİLİK POLİTİKASI"}</LocalizedClientLink></li>
-              <li><LocalizedClientLink href="/content/cookies" className="hover:text-gray-900 transition-colors">{dictionary?.footer?.cookie_policy ?? "ÇEREZ POLİTİKASI"}</LocalizedClientLink></li>
-              <li><LocalizedClientLink href="/content/cookies-settings" className="hover:text-gray-900 transition-colors">{dictionary?.footer?.cookie_settings ?? "TANIMLAMA BİLGİSİ AYARLARI"}</LocalizedClientLink></li>
             </ul>
           </div>
 
@@ -65,7 +63,7 @@ export default async function Footer({ dictionary }: { dictionary?: any }) {
             <h3 className="text-xs font-medium tracking-wider mb-4 underline underline-offset-4">{dictionary?.footer?.contact_title ?? "İLETİŞİM"}</h3>
             <ul className="space-y-2 text-xs text-gray-600">
               <li><LocalizedClientLink href="/contact" className="hover:text-gray-900 transition-colors">{dictionary?.footer?.contact ?? "İLETİŞİM"}</LocalizedClientLink></li>
-              <li><LocalizedClientLink href="/faq" className="hover:text-gray-900 transition-colors">{dictionary?.footer?.help ?? "YARDIM"}</LocalizedClientLink></li>
+              <li><LocalizedClientLink href="/yardim" className="hover:text-gray-900 transition-colors">{dictionary?.footer?.help ?? "YARDIM"}</LocalizedClientLink></li>
             </ul>
           </div>
         </div>
