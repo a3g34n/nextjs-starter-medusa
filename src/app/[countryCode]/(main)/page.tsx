@@ -25,7 +25,7 @@ export default async function Home(props: {
       {/* Section 2: YENİLER - Single Full Image */}
       <FullscreenSection
         sectionId="section-yeniler"
-        singleImageSrc="/images/section-2.jpg"
+        singleImageSrc="/images/section-2.png"
         activeIndex={1}
       />
 
