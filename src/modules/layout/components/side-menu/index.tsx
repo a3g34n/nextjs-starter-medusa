@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
+import Image from "next/image"
 
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { HttpTypes } from "@medusajs/types"
@@ -99,9 +100,7 @@ const SideMenu = ({ regions, locales, currentLocale, dictionary }: SideMenuProps
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
-          <span className="text-2xl sm:text-3xl font-light tracking-[0.2em] uppercase">
-            LOUNJSTUDIO
-          </span>
+          <Image src="/logo-white.png" alt="LOUNJ Studio" height={80} width={380} className="object-contain mt-2" />
         </div>
       </div>
     )
@@ -146,11 +145,17 @@ const SideMenu = ({ regions, locales, currentLocale, dictionary }: SideMenuProps
         {/* Logo */}
         <LocalizedClientLink
           href="/"
-          className="text-2xl sm:text-3xl font-light tracking-[0.2em] hover:opacity-80 transition-all duration-300 uppercase relative z-50"
+          className="hover:opacity-80 transition-all duration-300 relative z-50"
           data-testid="nav-store-link"
           onClick={close}
         >
-          LOUNJSTUDIO
+          <Image
+            src={isOpen ? "/logo.png" : "/logo-white.png"}
+            alt="LOUNJ Studio"
+            height={80}
+            width={380}
+            className="object-contain mt-2 transition-all duration-300"
+          />
         </LocalizedClientLink>
       </div>
 
