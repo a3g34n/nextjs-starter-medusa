@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react"
 import Image from "next/image"
+import { usePathname } from "next/navigation"
 
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { HttpTypes } from "@medusajs/types"
@@ -19,6 +20,8 @@ type SideMenuProps = {
 
 const SideMenu = ({ regions, locales, currentLocale, dictionary }: SideMenuProps) => {
   const [isOpen, setIsOpen] = useState(false)
+  const pathname = usePathname()
+  const isHome = pathname === "/" || /^\/[a-z]{2}$/.test(pathname)
   
   // Define items using dictionary
   // Fallback for missing keys (Home/Store)
@@ -40,7 +43,8 @@ const SideMenu = ({ regions, locales, currentLocale, dictionary }: SideMenuProps
   // ... rest of component logic ...
   // Keeping `const [mounted, setMounted]...`
   const [mounted, setMounted] = useState(false)
-  const { setNavHovered } = useHeaderHover()
+  const { isHovered, setNavHovered } = useHeaderHover()
+  const logoSrc = (!isHome || isOpen || isHovered) ? "/logo.png" : "/logo-white.png"
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
@@ -100,7 +104,7 @@ const SideMenu = ({ regions, locales, currentLocale, dictionary }: SideMenuProps
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
-          <Image src="/logo-white.png" alt="LOUNJ Studio" height={80} width={380} className="object-contain mt-2" />
+          <Image src={logoSrc} alt="LOUNJ Studio" height={80} width={380} className="object-contain mt-2" />
         </div>
       </div>
     )
@@ -150,7 +154,7 @@ const SideMenu = ({ regions, locales, currentLocale, dictionary }: SideMenuProps
           onClick={close}
         >
           <Image
-            src={isOpen ? "/logo.png" : "/logo-white.png"}
+            src={logoSrc}
             alt="LOUNJ Studio"
             height={80}
             width={380}
