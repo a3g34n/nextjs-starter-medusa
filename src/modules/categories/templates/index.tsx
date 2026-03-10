@@ -1,15 +1,17 @@
 import { notFound } from "next/navigation"
 import { Suspense } from "react"
 
-import InteractiveLink from "@modules/common/components/interactive-link"
 import SkeletonProductGrid from "@modules/skeletons/templates/skeleton-product-grid"
 import RefinementList from "@modules/store/components/refinement-list"
 import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
 import PaginatedProducts from "@modules/store/templates/paginated-products"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import CategoryTabs from "@modules/store/components/category-tabs"
+import StoreSubHeader from "@modules/store/components/store-sub-header"
+import { listCategories } from "@lib/data/categories"
 import { HttpTypes } from "@medusajs/types"
 
-export default function CategoryTemplate({
+export default async function CategoryTemplate({
   category,
   sortBy,
   page,
@@ -25,58 +27,52 @@ export default function CategoryTemplate({
 
   if (!category || !countryCode) notFound()
 
-  const parents = [] as HttpTypes.StoreProductCategory[]
-
-  const getParents = (category: HttpTypes.StoreProductCategory) => {
-    if (category.parent_category) {
-      parents.push(category.parent_category)
-      getParents(category.parent_category)
-    }
-  }
-
-  getParents(category)
+  const categories = await listCategories().then((cats) =>
+    cats.filter((c) => !c.parent_category)
+  )
 
   return (
     <div
-      className="flex flex-col small:flex-row small:items-start py-6 content-container"
+      className="flex flex-col py-6 pt-0 content-container relative"
       data-testid="category-container"
     >
-      <RefinementList sortBy={sort} data-testid="sort-by-container" />
-      <div className="w-full">
-        <div className="flex flex-row mb-8 text-2xl-semi gap-4">
-          {parents &&
-            parents.map((parent) => (
-              <span key={parent.id} className="text-ui-fg-subtle">
-                <LocalizedClientLink
-                  className="mr-4 hover:text-black"
-                  href={`/categories/${parent.handle}`}
-                  data-testid="sort-by-link"
-                >
-                  {parent.name}
-                </LocalizedClientLink>
-                /
+      <div className="h-28 w-full"></div>
+
+      <StoreSubHeader>
+        <div className="flex flex-col relative mb-4 pt-4 px-4 rounded-b-lg">
+          {/* Row 1: Breadcrumbs */}
+          <div className="w-full flex justify-start mb-2">
+            <div className="text-xs text-gray-500 uppercase tracking-widest">
+              <LocalizedClientLink href="/" className="hover:text-black">
+                ANASAYFA
+              </LocalizedClientLink>
+              <span className="mx-2">/</span>
+              <LocalizedClientLink href="/store" className="hover:text-black">
+                MAĞAZA
+              </LocalizedClientLink>
+              <span className="mx-2">/</span>
+              <span className="text-black border-b border-black">
+                {category.name.toUpperCase()}
               </span>
-            ))}
-          <h1 data-testid="category-page-title">{category.name}</h1>
+            </div>
+          </div>
+
+          {/* Row 2: Tabs (Center) & Filters (Right) */}
+          <div className="flex items-center justify-between w-full relative">
+            <div className="flex-1"></div>
+
+            <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-max max-w-[60%] overflow-x-auto no-scrollbar">
+              <CategoryTabs categories={categories} />
+            </div>
+
+            <div className="flex-1 flex justify-end">
+              <RefinementList sortBy={sort} />
+            </div>
+          </div>
         </div>
-        {category.description && (
-          <div className="mb-8 text-base-regular">
-            <p>{category.description}</p>
-          </div>
-        )}
-        {category.category_children && (
-          <div className="mb-8 text-base-large">
-            <ul className="grid grid-cols-1 gap-2">
-              {category.category_children?.map((c) => (
-                <li key={c.id}>
-                  <InteractiveLink href={`/categories/${c.handle}`}>
-                    {c.name}
-                  </InteractiveLink>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+      </StoreSubHeader>
+
+      <div className="w-full">
         <Suspense
           fallback={
             <SkeletonProductGrid
