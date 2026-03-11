@@ -10,15 +10,19 @@ import SearchModal from "@modules/search/components/search-modal"
 import NavClient from "./nav-client"
 
 import { retrieveCustomer } from "@lib/data/customer"
+import { listCategories } from "@lib/data/categories"
+import { listCollections } from "@lib/data/collections"
 
 // ... imports ...
 
 
 export default async function Nav({ dictionary, countryCode }: { dictionary: any, countryCode: string }) {
-  const [regions, locales, customer] = await Promise.all([
+  const [regions, locales, customer, categories, { collections }] = await Promise.all([
     listRegions().then((regions: StoreRegion[]) => regions),
     listLocales(),
     retrieveCustomer(),
+    listCategories(),
+    listCollections(),
   ])
 
   const t = dictionary
@@ -36,6 +40,8 @@ export default async function Nav({ dictionary, countryCode }: { dictionary: any
               locales={locales}
               currentLocale={currentLocale}
               dictionary={t}
+              categories={categories}
+              collections={collections}
             />
           </div>
 

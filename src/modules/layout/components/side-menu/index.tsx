@@ -9,39 +9,31 @@ import { HttpTypes } from "@medusajs/types"
 import { Locale } from "@lib/data/locales"
 import { useHeaderHover } from "@lib/context/header-hover-context"
 
-// ... imports
-
 type SideMenuProps = {
   regions: HttpTypes.StoreRegion[] | null
   locales: Locale[] | null
   currentLocale: string | null
-  dictionary: any // TODO: Type this properly
+  dictionary: any
+  categories: HttpTypes.StoreProductCategory[]
+  collections: HttpTypes.StoreCollection[]
 }
 
-const SideMenu = ({ regions, locales, currentLocale, dictionary }: SideMenuProps) => {
+const SideMenu = ({ regions: _regions, locales: _locales, currentLocale, dictionary, categories, collections }: SideMenuProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const pathname = usePathname()
   const isHome = pathname === "/" || /^\/[a-z]{2}$/.test(pathname)
-  
-  // Define items using dictionary
-  // Fallback for missing keys (Home/Store)
-  const homeText = currentLocale?.startsWith("tr") ? "Ana Sayfa" : "Home"
-  const storeText = currentLocale?.startsWith("tr") ? "Mağaza" : "Store"
-  
-  const SideMenuItems = [
-    { name: homeText, href: "/" },
-    { name: storeText, href: "/store" },
-    { name: dictionary.nav.account, href: "/account" },
-    { name: dictionary.nav.cart, href: "/cart" },
-  ]
+
+  const isTr = currentLocale?.startsWith("tr")
+
+  // Only top-level categories (no parent)
+  const topCategories = categories.filter((c) => !c.parent_category)
 
   const bottomLinks = [
-    { name: "+INFO", href: "/info" },
+    { name: dictionary.nav.account, href: "/account" },
+    { name: dictionary.nav.cart, href: "/cart" },
     { name: dictionary.nav.help, href: "/yardim" },
   ]
 
-  // ... rest of component logic ...
-  // Keeping `const [mounted, setMounted]...`
   const [mounted, setMounted] = useState(false)
   const { isHovered, setNavHovered } = useHeaderHover()
   const logoSrc = (!isHome || isOpen || isHovered) ? "/logo.png" : "/logo-white.png"
@@ -50,21 +42,14 @@ const SideMenu = ({ regions, locales, currentLocale, dictionary }: SideMenuProps
   useEffect(() => {
     setMounted(true)
     return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current)
-      }
+      if (timeoutRef.current) clearTimeout(timeoutRef.current)
     }
   }, [])
-// ... rest matches original until render ...
 
-  // Sync sidebar state with header hover state
   useEffect(() => {
     if (isOpen) {
       setNavHovered(true)
     } else {
-      // When sidebar closes, we reset hover state. 
-      // If the mouse is actually still on the navbar, NavClient's events should handle it,
-      // but explicitly setting false here handles the "mouse left to void" case.
       setNavHovered(false)
     }
   }, [isOpen, setNavHovered])
@@ -83,10 +68,7 @@ const SideMenu = ({ regions, locales, currentLocale, dictionary }: SideMenuProps
 
   const scheduleClose = () => {
     cancelClose()
-    // Longer delay for stability - 500ms
-    timeoutRef.current = setTimeout(() => {
-      setIsOpen(false)
-    }, 500)
+    timeoutRef.current = setTimeout(() => setIsOpen(false), 500)
   }
 
   const close = () => {
@@ -94,7 +76,6 @@ const SideMenu = ({ regions, locales, currentLocale, dictionary }: SideMenuProps
     setIsOpen(false)
   }
 
-  // Don't render interactive elements until mounted to prevent hydration issues
   if (!mounted) {
     return (
       <div className="h-full flex items-center">
@@ -112,7 +93,7 @@ const SideMenu = ({ regions, locales, currentLocale, dictionary }: SideMenuProps
 
   return (
     <div className="h-full flex items-center">
-      {/* Trigger area - hamburger or close icon */}
+      {/* Trigger area */}
       <div
         className="h-full flex items-center gap-x-6 cursor-pointer"
         onMouseEnter={open}
@@ -123,7 +104,6 @@ const SideMenu = ({ regions, locales, currentLocale, dictionary }: SideMenuProps
           className="relative h-full flex items-center transition-all ease-out duration-300 focus:outline-none hover:opacity-80"
           onClick={isOpen ? close : open}
         >
-          {/* Mobile: Show X if open, Hamburger if closed. Desktop: Show Hamburger if closed, nothing if open (logo shifts) */}
           <div className="md:hidden">
             {isOpen ? (
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7">
@@ -135,8 +115,6 @@ const SideMenu = ({ regions, locales, currentLocale, dictionary }: SideMenuProps
               </svg>
             )}
           </div>
-          
-          {/* Desktop: Only Hamburger when closed */}
           <div className="hidden md:block">
             {!isOpen && (
               <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -145,7 +123,7 @@ const SideMenu = ({ regions, locales, currentLocale, dictionary }: SideMenuProps
             )}
           </div>
         </button>
-        
+
         {/* Logo */}
         <LocalizedClientLink
           href="/"
@@ -163,35 +141,26 @@ const SideMenu = ({ regions, locales, currentLocale, dictionary }: SideMenuProps
         </LocalizedClientLink>
       </div>
 
-      {/* Desktop: Full navbar hover zone - keeps sidebar open when hovering anywhere on navbar */}
+      {/* Desktop: navbar hover zone */}
       {isOpen && (
         <div
           className="hidden md:block fixed left-0 top-0 z-45"
-          style={{
-            width: '100vw',
-            height: '80px',
-            backgroundColor: 'transparent',
-            pointerEvents: 'none',
-          }}
+          style={{ width: '100vw', height: '80px', backgroundColor: 'transparent', pointerEvents: 'none' }}
           onMouseEnter={cancelClose}
         >
-          <div 
-            style={{
-              position: 'absolute', left: 0, top: 0, width: '400px', height: '100%', pointerEvents: 'auto',
-            }}
+          <div
+            style={{ position: 'absolute', left: 0, top: 0, width: '400px', height: '100%', pointerEvents: 'auto' }}
             onMouseEnter={open}
             onMouseLeave={scheduleClose}
           />
         </div>
       )}
 
-      {/* Desktop: Backdrop to close on right side hover */}
+      {/* Desktop: backdrop to close on right side */}
       {isOpen && (
         <div
           className="hidden md:block fixed z-40"
-          style={{ 
-            left: '288px', top: '80px', right: 0, bottom: 0, backgroundColor: 'transparent' 
-          }}
+          style={{ left: '288px', top: '80px', right: 0, bottom: 0, backgroundColor: 'transparent' }}
           onMouseEnter={close}
           data-testid="side-menu-backdrop"
         />
@@ -204,9 +173,7 @@ const SideMenu = ({ regions, locales, currentLocale, dictionary }: SideMenuProps
           inset-0 z-[-1] pt-[160px] md:pt-0
           md:top-20 md:left-0 md:bottom-0 md:w-96 md:h-[calc(100vh-80px)] md:z-50
         `}
-        style={{
-          transform: isOpen ? 'translateX(0)' : 'translateX(-100%)',
-        }}
+        style={{ transform: isOpen ? 'translateX(0)' : 'translateX(-100%)' }}
         onMouseEnter={open}
         onMouseLeave={scheduleClose}
       >
@@ -215,19 +182,73 @@ const SideMenu = ({ regions, locales, currentLocale, dictionary }: SideMenuProps
           data-darkreader-ignore="true"
           className="flex flex-col h-full px-8 pb-8 md:py-8"
         >
-          {/* Main Menu Items */}
-          <div className="flex-1 space-y-6">
-            {SideMenuItems.map((item) => (
+          {/* Main Menu */}
+          <div className="flex-1 space-y-8">
+            {/* MAĞAZA */}
+            <div>
               <LocalizedClientLink
-                key={item.name}
-                href={item.href}
-                className="block text-2xl font-light tracking-wide"
+                href="/store"
+                className="block text-2xl tracking-wide uppercase"
                 style={{ color: '#111111' }}
                 onClick={close}
               >
-                {item.name}
+                {isTr ? "Mağaza" : "Store"}
               </LocalizedClientLink>
-            ))}
+              {topCategories.length > 0 && (
+                <div className="mt-3 space-y-2 pl-5">
+                  {topCategories.map((cat) => (
+                    <LocalizedClientLink
+                      key={cat.id}
+                      href={`/categories/${cat.handle}`}
+                      className="block text-base tracking-wide uppercase"
+                      style={{ color: '#555555' }}
+                      onClick={close}
+                    >
+                      {cat.name}
+                    </LocalizedClientLink>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* KOLEKSİYONLAR */}
+            <div>
+              <LocalizedClientLink
+                href="/store"
+                className="block text-2xl tracking-wide uppercase"
+                style={{ color: '#111111' }}
+                onClick={close}
+              >
+                {isTr ? "Koleksiyonlar" : "Collections"}
+              </LocalizedClientLink>
+              {collections.length > 0 && (
+                <div className="mt-3 space-y-2 pl-5">
+                  {collections.map((col) => (
+                    <LocalizedClientLink
+                      key={col.id}
+                      href={`/collections/${col.handle}`}
+                      className="block text-base tracking-wide uppercase"
+                      style={{ color: '#555555' }}
+                      onClick={close}
+                    >
+                      {col.title}
+                    </LocalizedClientLink>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* HAKKIMIZDA */}
+            <div>
+              <LocalizedClientLink
+                href="/hakkimizda"
+                className="block text-2xl tracking-wide uppercase"
+                style={{ color: '#111111' }}
+                onClick={close}
+              >
+                {isTr ? "Hakkımızda" : "About Us"}
+              </LocalizedClientLink>
+            </div>
           </div>
 
           {/* Bottom Links */}

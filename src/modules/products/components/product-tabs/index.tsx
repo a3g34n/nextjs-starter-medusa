@@ -44,35 +44,25 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
 const ProductInfoTab = ({ product }: ProductTabsProps) => {
   return (
     <div className="text-small-regular py-8">
-      <div className="grid grid-cols-2 gap-x-8">
-        <div className="flex flex-col gap-y-4">
+      <div className="flex flex-col gap-y-6">
+        {product.material && (
           <div>
-            <span className="font-semibold">Malzeme</span>
-            <p>{product.material ? product.material : "-"}</p>
+            <span className="font-semibold">İÇERİK</span>
+            <p className="mt-1">{product.material}</p>
           </div>
+        )}
+        {product.mid_code && (
           <div>
-            <span className="font-semibold">Menşei Ülke</span>
-            <p>{product.origin_country ? product.origin_country : "-"}</p>
+            <span className="font-semibold">BAKIM</span>
+            <p className="mt-1 whitespace-pre-line">{product.mid_code}</p>
           </div>
+        )}
+        {product.origin_country && (
           <div>
-            <span className="font-semibold">Tür</span>
-            <p>{product.type ? product.type.value : "-"}</p>
+            <span className="font-semibold">MENŞEİ</span>
+            <p className="mt-1">{product.origin_country}</p>
           </div>
-        </div>
-        <div className="flex flex-col gap-y-4">
-          <div>
-            <span className="font-semibold">Ağırlık</span>
-            <p>{product.weight ? `${product.weight} g` : "-"}</p>
-          </div>
-          <div>
-            <span className="font-semibold">Boyutlar</span>
-            <p>
-              {product.length && product.width && product.height
-                ? `${product.length}L x ${product.width}W x ${product.height}H`
-                : "-"}
-            </p>
-          </div>
-        </div>
+        )}
       </div>
     </div>
   )

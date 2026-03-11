@@ -10,14 +10,14 @@ export default async function PreviewPrice({ price }: { price: VariantPrice }) {
     <>
       {price.price_type === "sale" && (
         <Text
-          className="line-through text-ui-fg-muted"
+          className="line-through text-xs tracking-wide text-ui-fg-muted"
           data-testid="original-price"
         >
           {price.original_price}
         </Text>
       )}
       <Text
-        className={clx("text-ui-fg-muted", {
+        className={clx("text-xs tracking-wide font-bold text-ui-fg-subtle", {
           "text-ui-fg-interactive": price.price_type === "sale",
         })}
         data-testid="price"
