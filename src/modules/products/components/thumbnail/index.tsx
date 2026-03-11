@@ -23,6 +23,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
   "data-testid": dataTestid,
 }) => {
   const initialImage = thumbnail || images?.[0]?.url
+  const hoverImage = images?.[1]?.url
 
   return (
     <Container
@@ -42,6 +43,19 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
       data-testid={dataTestid}
     >
       <ImageOrPlaceholder image={initialImage} size={size} />
+      {hoverImage && (
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
+          <Image
+            src={hoverImage}
+            alt="Thumbnail hover"
+            className="absolute inset-0 object-cover object-center"
+            draggable={false}
+            quality={50}
+            sizes="(max-width: 576px) 280px, (max-width: 768px) 360px, (max-width: 992px) 480px, 800px"
+            fill
+          />
+        </div>
+      )}
     </Container>
   )
 }
