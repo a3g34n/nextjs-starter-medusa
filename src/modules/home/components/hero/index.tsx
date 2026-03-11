@@ -26,11 +26,11 @@ const Hero = () => {
       <div className="absolute inset-0 bg-black/20" />
 
       {/* Center Text Overlay */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
+      {/* <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
         <h1 className="text-5xl md:text-7xl font-light tracking-[0.2em] text-[#c4b590] uppercase">
           İNDİRİM
         </h1>
-      </div>
+      </div> */}
 
       <div className="absolute bottom-8 left-0 right-0 z-10 pointer-events-none">
         <p className="text-center text-white/70 text-xs mb-4 px-4">
