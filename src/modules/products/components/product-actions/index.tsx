@@ -38,6 +38,7 @@ export default function ProductActions({
 
   const [options, setOptions] = useState<Record<string, string | undefined>>({})
   const [isAdding, setIsAdding] = useState(false)
+  const [initials, setInitials] = useState("")
   const countryCode = useParams().countryCode as string
 
   // If there is only 1 variant, preselect the options
@@ -155,6 +156,20 @@ export default function ProductActions({
                   </div>
                 )
               })}
+              <div className="flex flex-col gap-y-3">
+                <span className="text-xs font-semibold tracking-widest uppercase">
+                  Başharfleriniz <span className="text-red-500">*</span>
+                </span>
+                <input
+                  type="text"
+                  value={initials}
+                  onChange={(e) => setInitials(e.target.value.toUpperCase().slice(0, 3))}
+                  placeholder="XXX"
+                  maxLength={3}
+                  className="border border-gray-200 h-12 px-4 text-sm tracking-widest uppercase placeholder:text-gray-300 focus:outline-none focus:border-gray-800 transition-all w-full"
+                  disabled={!!disabled || isAdding}
+                />
+              </div>
               <Divider />
             </div>
           )}
