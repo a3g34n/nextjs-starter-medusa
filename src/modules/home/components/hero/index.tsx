@@ -1,22 +1,33 @@
 "use client"
 
 
-
 const Hero = () => {
   return (
     <section id="section-indirim" className="h-screen w-full relative overflow-hidden snap-start">
-      {/* Video Background - Replace with your video */}
+      {/* Desktop Video */}
       <video
         autoPlay
         loop
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover object-[25%_center] md:object-center"
+        className="hidden md:block absolute inset-0 w-full h-full object-cover object-center"
         poster="/hero-poster.jpg"
       >
-        {/* Add your video sources here */}
         <source src="/hero-video.mp4" type="video/mp4" />
         <source src="/hero-video.webm" type="video/webm" />
+      </video>
+
+      {/* Mobile Video */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="block md:hidden absolute inset-0 w-full h-full object-cover object-center"
+        poster="/hero-poster-mobile.jpg"
+      >
+        <source src="/hero-video-mobile.mp4" type="video/mp4" />
+        <source src="/hero-video-mobile.webm" type="video/webm" />
       </video>
 
       {/* Fallback gradient background if no video */}
@@ -25,16 +36,9 @@ const Hero = () => {
       {/* Dark overlay for better text contrast */}
       <div className="absolute inset-0 bg-black/20" />
 
-      {/* Center Text Overlay */}
-      {/* <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
-        <h1 className="text-5xl md:text-7xl font-light tracking-[0.2em] text-[#c4b590] uppercase">
-          İNDİRİM
-        </h1>
-      </div> */}
-
       <div className="absolute bottom-8 left-0 right-0 z-10 pointer-events-none">
         <p className="text-center text-white/70 text-xs mb-4 px-4">
-          İndirim 1 Ocak 20:00'da online'da başlayıp 2 Mart'ta bitiyor. İndirim seçili ürünlerde stoklarla sınırlıdır.
+          İndirim 1 Ocak 20:00&apos;da online&apos;da başlayıp 2 Mart&apos;ta bitiyor. İndirim seçili ürünlerde stoklarla sınırlıdır.
         </p>
       </div>
     </section>

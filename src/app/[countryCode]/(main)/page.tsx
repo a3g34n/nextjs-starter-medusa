@@ -26,6 +26,7 @@ export default async function Home(props: {
       <FullscreenSection
         sectionId="section-yeniler"
         singleImageSrc="/images/section-2.png"
+        mobileImageSrc="/images/section-2-mobile.png"
         activeIndex={1}
       />
 
@@ -33,6 +34,7 @@ export default async function Home(props: {
       <FullscreenSection
         sectionId="section-koleksiyon"
         singleImageSrc="/images/section-3.jpg"
+        mobileImageSrc="/images/section-3-mobile.jpg"
         activeIndex={2}
       />
 
