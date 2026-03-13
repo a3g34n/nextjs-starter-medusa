@@ -188,7 +188,7 @@ const SideMenu = ({ regions: _regions, locales: _locales, currentLocale, diction
             <div>
               <LocalizedClientLink
                 href="/store"
-                className="block text-2xl tracking-wide uppercase"
+                className="block text-xl tracking-wide uppercase"
                 style={{ color: '#111111' }}
                 onClick={close}
               >
@@ -200,7 +200,7 @@ const SideMenu = ({ regions: _regions, locales: _locales, currentLocale, diction
                     <LocalizedClientLink
                       key={cat.id}
                       href={`/categories/${cat.handle}`}
-                      className="block text-base tracking-wide uppercase"
+                      className="block text-sm tracking-wide uppercase"
                       style={{ color: '#555555' }}
                       onClick={close}
                     >
@@ -215,7 +215,7 @@ const SideMenu = ({ regions: _regions, locales: _locales, currentLocale, diction
             <div>
               <LocalizedClientLink
                 href="/store"
-                className="block text-2xl tracking-wide uppercase"
+                className="block text-xl tracking-wide uppercase"
                 style={{ color: '#111111' }}
                 onClick={close}
               >
@@ -227,7 +227,7 @@ const SideMenu = ({ regions: _regions, locales: _locales, currentLocale, diction
                     <LocalizedClientLink
                       key={col.id}
                       href={`/collections/${col.handle}`}
-                      className="block text-base tracking-wide uppercase"
+                      className="block text-sm tracking-wide uppercase"
                       style={{ color: '#555555' }}
                       onClick={close}
                     >
@@ -242,7 +242,7 @@ const SideMenu = ({ regions: _regions, locales: _locales, currentLocale, diction
             <div>
               <LocalizedClientLink
                 href="/hakkimizda"
-                className="block text-2xl tracking-wide uppercase"
+                className="block text-xl tracking-wide uppercase"
                 style={{ color: '#111111' }}
                 onClick={close}
               >
