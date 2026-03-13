@@ -82,6 +82,7 @@ const dictionary = {
       details: "Details",
       reviews: "Reviews",
       related_products: "You might also like",
+      related_products_subtitle: "You might also want to check out these products.",
     },
     cart: {
       title: "Sort",
@@ -276,6 +277,7 @@ const dictionary = {
       details: "Detaylar",
       reviews: "Yorumlar",
       related_products: "Bunu da beğenebilirsiniz",
+      related_products_subtitle: "Bu ürünlere de göz atmak isteyebilirsiniz.",
     },
     cart: {
       title: "Sepet",
