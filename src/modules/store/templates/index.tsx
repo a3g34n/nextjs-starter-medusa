@@ -23,49 +23,48 @@ const StoreTemplate = async ({
 }) => {
   const pageNumber = page ? parseInt(page) : 1
   const sort = sortBy || "created_at"
-  
-  // Fetch categories for tabs
-  const categories = await listCategories().then(cats => 
+
+  const categories = await listCategories().then(cats =>
     cats.filter(c => !c.parent_category)
   )
 
   return (
-    <div className="flex flex-col py-6 pt-0 content-container relative" data-testid="category-container"> {/* Removed pt-28, handled by sticky placement or spacer if needed */}
-      {/* Spacer for fixed navbar initial height to prevent overlap if we remove padding */}
+    <div className="flex flex-col py-6 pt-0 content-container relative" data-testid="category-container">
       <div className="h-28 w-full"></div>
 
-      {/* Sticky Top Header: Breadcrumbs (Left) - Tabs & Filters (Row) */}
       <StoreSubHeader>
-        <div className="flex flex-col relative mb-4 pt-4 px-4 rounded-b-lg">
-          {/* Row 1: Breadcrumbs */}
+        {/* Desktop layout */}
+        <div className="hidden small:flex flex-col relative mb-4 pt-4 px-4 rounded-b-lg">
           <div className="w-full flex justify-start mb-2">
-             <div className="text-xs text-gray-500 uppercase tracking-widest">
-                <LocalizedClientLink href="/" className="hover:text-black">ANASAYFA</LocalizedClientLink>
-                <span className="mx-2">/</span>
-                <span className="text-black border-b border-black">MAĞAZA</span>
-             </div>
+            <div className="text-xs text-gray-500 uppercase tracking-widest">
+              <LocalizedClientLink href="/" className="hover:text-black">ANASAYFA</LocalizedClientLink>
+              <span className="mx-2">/</span>
+              <span className="text-black border-b border-black">MAĞAZA</span>
+            </div>
           </div>
-
-          {/* Row 2: Tabs (Center) & Filters (Right) */}
           <div className="flex items-center justify-between w-full relative">
-            {/* Spacer/Left side empty to balance Filters */}
             <div className="flex-1"></div>
-
-            {/* Centered Tabs */}
             <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-max max-w-[60%] overflow-x-auto no-scrollbar">
-                <CategoryTabs categories={categories} />
+              <CategoryTabs categories={categories} />
             </div>
-
-            {/* Right: Filters */}
             <div className="flex-1 flex justify-end">
-                <RefinementList sortBy={sort} />
+              <RefinementList sortBy={sort} />
             </div>
+          </div>
+        </div>
+
+        {/* Mobile layout */}
+        <div className="block small:hidden">
+          <div className="w-full border-b border-gray-100 px-2">
+            <CategoryTabs categories={categories} mobile />
+          </div>
+          <div className="flex justify-center py-2 border-b border-gray-100">
+            <RefinementList sortBy={sort} />
           </div>
         </div>
       </StoreSubHeader>
 
       <div className="w-full">
-        {/* Removed redundant title since it's in breadcrumbs/tabs context */}
         <Suspense fallback={<SkeletonProductGrid />}>
           <PaginatedProducts
             sortBy={sort}

@@ -39,35 +39,35 @@ export default async function CategoryTemplate({
       <div className="h-28 w-full"></div>
 
       <StoreSubHeader>
-        <div className="flex flex-col relative mb-4 pt-4 px-4 rounded-b-lg">
-          {/* Row 1: Breadcrumbs */}
+        {/* Desktop layout */}
+        <div className="hidden small:flex flex-col relative mb-4 pt-4 px-4 rounded-b-lg">
           <div className="w-full flex justify-start mb-2">
             <div className="text-xs text-gray-500 uppercase tracking-widest">
-              <LocalizedClientLink href="/" className="hover:text-black">
-                ANASAYFA
-              </LocalizedClientLink>
+              <LocalizedClientLink href="/" className="hover:text-black">ANASAYFA</LocalizedClientLink>
               <span className="mx-2">/</span>
-              <LocalizedClientLink href="/store" className="hover:text-black">
-                MAĞAZA
-              </LocalizedClientLink>
+              <LocalizedClientLink href="/store" className="hover:text-black">MAĞAZA</LocalizedClientLink>
               <span className="mx-2">/</span>
-              <span className="text-black border-b border-black">
-                {category.name.toUpperCase()}
-              </span>
+              <span className="text-black border-b border-black">{category.name.toUpperCase()}</span>
             </div>
           </div>
-
-          {/* Row 2: Tabs (Center) & Filters (Right) */}
           <div className="flex items-center justify-between w-full relative">
             <div className="flex-1"></div>
-
             <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-max max-w-[60%] overflow-x-auto no-scrollbar">
               <CategoryTabs categories={categories} />
             </div>
-
             <div className="flex-1 flex justify-end">
               <RefinementList sortBy={sort} />
             </div>
+          </div>
+        </div>
+
+        {/* Mobile layout */}
+        <div className="block small:hidden">
+          <div className="w-full border-b border-gray-100 px-2">
+            <CategoryTabs categories={categories} mobile />
+          </div>
+          <div className="flex justify-center py-2 border-b border-gray-100">
+            <RefinementList sortBy={sort} />
           </div>
         </div>
       </StoreSubHeader>

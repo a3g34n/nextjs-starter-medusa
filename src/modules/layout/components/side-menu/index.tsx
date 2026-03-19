@@ -79,13 +79,15 @@ const SideMenu = ({ regions: _regions, locales: _locales, currentLocale, diction
   if (!mounted) {
     return (
       <div className="h-full flex items-center">
-        <div className="h-full flex items-center gap-x-6">
+        <div className="h-full flex items-center gap-x-2 md:gap-x-6">
           <button className="relative h-full flex items-center focus:outline-none">
             <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
-          <Image src={logoSrc} alt="LOUNJ Studio" height={80} width={380} className="object-contain mt-2" />
+          <div className="w-[220px] sm:w-[280px] md:w-[380px]">
+            <Image src={logoSrc} alt="LOUNJ Studio" height={80} width={380} className="object-contain w-full h-auto mt-2" />
+          </div>
         </div>
       </div>
     )
@@ -95,7 +97,7 @@ const SideMenu = ({ regions: _regions, locales: _locales, currentLocale, diction
     <div className="h-full flex items-center">
       {/* Trigger area */}
       <div
-        className="h-full flex items-center gap-x-6 cursor-pointer"
+        className="h-full flex items-center gap-x-2 md:gap-x-6 cursor-pointer"
         onMouseEnter={open}
         onMouseLeave={scheduleClose}
       >
@@ -131,13 +133,15 @@ const SideMenu = ({ regions: _regions, locales: _locales, currentLocale, diction
           data-testid="nav-store-link"
           onClick={close}
         >
-          <Image
-            src={logoSrc}
-            alt="LOUNJ Studio"
-            height={80}
-            width={380}
-            className="object-contain mt-2 transition-all duration-300"
-          />
+          <div className="w-[220px] sm:w-[280px] md:w-[380px]">
+            <Image
+              src={logoSrc}
+              alt="LOUNJ Studio"
+              height={80}
+              width={380}
+              className="object-contain w-full h-auto mt-2 transition-all duration-300"
+            />
+          </div>
         </LocalizedClientLink>
       </div>
 
