@@ -11,6 +11,7 @@ import { notFound } from "next/navigation"
 import { HttpTypes } from "@medusajs/types"
 
 import ProductActionsWrapper from "./product-actions-wrapper"
+import MobileProductHeaderServer from "@modules/products/components/mobile-product-header/server"
 
 type ProductTemplateProps = {
   product: HttpTypes.StoreProduct
@@ -31,32 +32,55 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
 
   return (
     <>
+      {/* ── Mobile layout ── */}
+      <div className="block small:hidden" data-testid="product-container">
+        {/* Floating X + cart overlay */}
+        <Suspense fallback={null}>
+          <MobileProductHeaderServer />
+        </Suspense>
+
+        {/* Full-bleed image carousel – no top padding, nav is hidden on mobile */}
+        <ImageGallery images={images} />
+
+        {/* Product info + actions */}
+        <div className="px-6 pt-6 pb-8 flex flex-col gap-y-6">
+          <ProductInfo product={product} />
+          <ProductOnboardingCta />
+          <Suspense
+            fallback={
+              <ProductActions disabled={true} product={product} region={region} />
+            }
+          >
+            <ProductActionsWrapper id={product.id} region={region} />
+          </Suspense>
+          <ProductTabs product={product} />
+        </div>
+      </div>
+
+      {/* ── Desktop layout ── */}
       <div
-        className="content-container flex flex-col small:flex-row small:items-start pb-6 pt-32 md:pt-24 relative"
+        className="hidden small:flex content-container flex-row items-start pb-6 pt-24 relative"
         data-testid="product-container"
       >
-        <div className="flex flex-col small:sticky small:top-48 small:py-0 small:max-w-[300px] w-full py-8 gap-y-6">
+        <div className="flex flex-col sticky top-48 py-8 max-w-[300px] w-full gap-y-6">
           <ProductInfo product={product} />
           <ProductTabs product={product} />
         </div>
         <div className="block w-full relative">
           <ImageGallery images={images} />
         </div>
-        <div className="flex flex-col small:sticky small:top-48 small:py-0 small:max-w-[300px] w-full py-8 gap-y-12">
+        <div className="flex flex-col sticky top-48 py-8 max-w-[300px] w-full gap-y-12">
           <ProductOnboardingCta />
           <Suspense
             fallback={
-              <ProductActions
-                disabled={true}
-                product={product}
-                region={region}
-              />
+              <ProductActions disabled={true} product={product} region={region} />
             }
           >
             <ProductActionsWrapper id={product.id} region={region} />
           </Suspense>
         </div>
       </div>
+
       <div
         className="content-container my-16 small:my-32"
         data-testid="related-products-container"

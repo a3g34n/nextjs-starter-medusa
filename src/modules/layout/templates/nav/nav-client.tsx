@@ -12,9 +12,12 @@ export default function NavClient({ children }: { children: React.ReactNode }) {
   // Regex matches "/" or "/xx" where xx is 2 letters
   const isHome = pathname === "/" || /^\/[a-z]{2}$/.test(pathname)
 
+  // Hide nav on mobile for product detail pages (custom overlay is shown instead)
+  const isProductPage = /^\/[a-z]{2}\/products\/[^/]+/.test(pathname)
+
   return (
-    <div 
-      className="fixed top-0 inset-x-0 z-50"
+    <div
+      className={clx("fixed top-0 inset-x-0 z-50", isProductPage && "hidden small:block")}
       onMouseEnter={() => setNavHovered(true)}
       onMouseLeave={() => setNavHovered(false)}
     >
