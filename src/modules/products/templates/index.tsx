@@ -1,4 +1,5 @@
 import React, { Suspense } from "react"
+import { Text } from "@medusajs/ui"
 
 import ImageGallery from "@modules/products/components/image-gallery"
 import ProductActions from "@modules/products/components/product-actions"
@@ -43,8 +44,8 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
         <ImageGallery images={images} />
 
         {/* Product info + actions */}
-        <div className="px-6 pt-6 pb-8 flex flex-col gap-y-6">
-          <ProductInfo product={product} />
+        <div className="px-6 pt-4 pb-8 flex flex-col gap-y-3">
+          <ProductInfo product={product} hideDescription />
           <ProductOnboardingCta />
           <Suspense
             fallback={
@@ -53,6 +54,14 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
           >
             <ProductActionsWrapper id={product.id} region={region} />
           </Suspense>
+          {product.description && (
+            <Text
+              className="text-xs text-ui-fg-subtle whitespace-pre-line"
+              data-testid="product-description"
+            >
+              {product.description}
+            </Text>
+          )}
           <ProductTabs product={product} />
         </div>
       </div>

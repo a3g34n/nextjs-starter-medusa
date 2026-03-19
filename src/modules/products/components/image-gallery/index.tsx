@@ -35,7 +35,7 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
   return (
     <div className="flex items-start relative w-full">
       {/* Mobile: vertical scroll snap within fixed-height container */}
-      <div className="block small:hidden w-full">
+      <div className="block small:hidden w-full relative">
         <div
           ref={scrollRef}
           className="snap-y snap-mandatory overflow-y-scroll"
@@ -66,32 +66,19 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
           ))}
         </div>
 
-        {/* Thumbnail row */}
+        {/* Vertical dot indicators on the right */}
         {images.length > 1 && (
-          <div
-            className="flex gap-x-2 mt-2 px-4 overflow-x-auto"
-            style={{ scrollbarWidth: "none" }}
-          >
-            {images.map((image, index) => (
+          <div className="absolute right-3 top-1/2 -translate-y-1/2 flex flex-col gap-y-1.5">
+            {images.map((_, index) => (
               <button
-                key={image.id}
+                key={index}
                 onClick={() => scrollToImage(index)}
-                className={`relative flex-shrink-0 w-16 h-16 border-2 transition-colors ${
+                className={`rounded-full transition-all duration-200 bg-gray-900 ${
                   activeIndex === index
-                    ? "border-gray-900"
-                    : "border-transparent opacity-60"
+                    ? "w-1.5 h-4"
+                    : "w-1 h-1.5 opacity-40"
                 }`}
-              >
-                {!!image.url && (
-                  <Image
-                    src={image.url}
-                    alt={`Thumbnail ${index + 1}`}
-                    fill
-                    sizes="64px"
-                    style={{ objectFit: "cover" }}
-                  />
-                )}
-              </button>
+              />
             ))}
           </div>
         )}

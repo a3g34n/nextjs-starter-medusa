@@ -142,11 +142,11 @@ const OptionSelect: React.FC<OptionSelectProps> = ({
 
   if (isFontOption(title)) {
     return (
-      <div className="flex flex-col gap-y-3">
-        <span className="text-xs font-semibold tracking-widest uppercase">
+      <div className="flex flex-col gap-y-1.5">
+        <span className="text-[10px] font-semibold tracking-widest uppercase text-gray-500">
           {title} <span className="text-red-500">*</span>
         </span>
-        <div className="flex gap-3" data-testid={dataTestId}>
+        <div className="flex gap-2" data-testid={dataTestId}>
           {filteredOptions.map((v) => {
             const imgSrc = fontImageMap[v.toLowerCase()] ?? "/images/font-block.webp"
             const isSelected = v === current
@@ -156,7 +156,7 @@ const OptionSelect: React.FC<OptionSelectProps> = ({
                 onClick={() => updateOption(option.id, v)}
                 disabled={disabled}
                 className={clx(
-                  "border w-[120px] h-[90px] overflow-hidden flex items-center justify-center transition-all",
+                  "border w-[68px] h-[50px] overflow-hidden flex items-center justify-center transition-all",
                   {
                     "border-gray-800": isSelected,
                     "border-gray-200 hover:border-gray-400": !isSelected,
@@ -167,8 +167,8 @@ const OptionSelect: React.FC<OptionSelectProps> = ({
                 <Image
                   src={imgSrc}
                   alt={v}
-                  width={110}
-                  height={80}
+                  width={80}
+                  height={58}
                   className="object-contain"
                 />
               </button>
@@ -181,8 +181,8 @@ const OptionSelect: React.FC<OptionSelectProps> = ({
 
   if (isColorOption(title, filteredOptions)) {
     return (
-      <div className="flex flex-col gap-y-3">
-        <span className="text-xs font-semibold tracking-widest uppercase">
+      <div className="flex flex-col gap-y-1.5">
+        <span className="text-[10px] font-semibold tracking-widest uppercase text-gray-500">
           {title} <span className="text-red-500">*</span>
         </span>
         <div className="flex flex-wrap gap-2" data-testid={dataTestId}>
@@ -196,7 +196,7 @@ const OptionSelect: React.FC<OptionSelectProps> = ({
                 disabled={disabled}
                 title={v}
                 className={clx(
-                  "w-8 h-8 rounded-full transition-all border border-transparent",
+                  "w-7 h-7 rounded-full transition-all border border-transparent",
                   {
                     "ring-2 ring-offset-2 ring-gray-800": isSelected,
                     "hover:ring-2 hover:ring-offset-1 hover:ring-gray-400":
@@ -215,8 +215,8 @@ const OptionSelect: React.FC<OptionSelectProps> = ({
 
   // Default: text buttons
   return (
-    <div className="flex flex-col gap-y-3">
-      <span className="text-xs font-semibold tracking-widest uppercase">
+    <div className="flex flex-col gap-y-1.5">
+      <span className="text-[10px] font-semibold tracking-widest uppercase text-gray-500">
         {title} <span className="text-red-500">*</span>
       </span>
       <div className="flex flex-wrap gap-2" data-testid={dataTestId}>
@@ -226,7 +226,7 @@ const OptionSelect: React.FC<OptionSelectProps> = ({
               onClick={() => updateOption(option.id, v)}
               key={v}
               className={clx(
-                "border text-sm h-10 px-4 flex-1 transition-all",
+                "border text-xs h-8 px-3 flex-1 transition-all",
                 {
                   "border-gray-800 bg-gray-50": v === current,
                   "border-gray-200 hover:border-gray-400": v !== current,

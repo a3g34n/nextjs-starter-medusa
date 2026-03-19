@@ -138,10 +138,12 @@ export default function ProductActions({
 
   return (
     <>
-      <div className="flex flex-col gap-y-2" ref={actionsRef}>
+      <div className="flex flex-col gap-y-1" ref={actionsRef}>
+        <ProductPrice product={product} variant={selectedVariant} />
+
         <div>
           {(product.variants?.length ?? 0) > 1 && (
-            <div className="flex flex-col gap-y-4">
+            <div className="flex flex-col gap-y-2 mt-2">
               {(product.options || []).map((option) => {
                 return (
                   <div key={option.id}>
@@ -156,7 +158,7 @@ export default function ProductActions({
                   </div>
                 )
               })}
-              <div className="flex flex-col gap-y-3">
+              <div className="flex flex-col gap-y-2">
                 <span className="text-xs font-semibold tracking-widest uppercase">
                   Başharfleriniz <span className="text-red-500">*</span>
                 </span>
@@ -166,7 +168,7 @@ export default function ProductActions({
                   onChange={(e) => setInitials(e.target.value.toUpperCase().slice(0, 3))}
                   placeholder="XXX"
                   maxLength={3}
-                  className="border border-gray-200 h-12 px-4 text-sm tracking-widest uppercase placeholder:text-gray-300 focus:outline-none focus:border-gray-800 transition-all w-full"
+                  className="border border-gray-200 h-9 px-3 text-xs tracking-widest uppercase placeholder:text-gray-300 focus:outline-none focus:border-gray-800 transition-all w-full"
                   disabled={!!disabled || isAdding}
                 />
               </div>
@@ -174,8 +176,6 @@ export default function ProductActions({
             </div>
           )}
         </div>
-
-        <ProductPrice product={product} variant={selectedVariant} />
 
         <Button
           onClick={handleAddToCart}

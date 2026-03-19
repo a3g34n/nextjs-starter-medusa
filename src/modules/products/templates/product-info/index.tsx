@@ -4,12 +4,13 @@ import LocalizedClientLink from "@modules/common/components/localized-client-lin
 
 type ProductInfoProps = {
   product: HttpTypes.StoreProduct
+  hideDescription?: boolean
 }
 
-const ProductInfo = ({ product }: ProductInfoProps) => {
+const ProductInfo = ({ product, hideDescription }: ProductInfoProps) => {
   return (
     <div id="product-info">
-      <div className="flex flex-col gap-y-4 lg:max-w-[500px] mx-auto">
+      <div className="flex flex-col gap-y-1 lg:max-w-[500px] mx-auto">
         {product.collection && (
           <LocalizedClientLink
             href={`/collections/${product.collection.handle}`}
@@ -20,18 +21,20 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
         )}
         <Heading
           level="h2"
-          className="text-xl leading-7 text-ui-fg-base"
+          className="text-lg leading-6 text-ui-fg-base"
           data-testid="product-title"
         >
           {product.title}
         </Heading>
 
-        <Text
-          className="text-medium text-ui-fg-subtle whitespace-pre-line"
-          data-testid="product-description"
-        >
-          {product.description}
-        </Text>
+        {!hideDescription && (
+          <Text
+            className="text-medium text-ui-fg-subtle whitespace-pre-line"
+            data-testid="product-description"
+          >
+            {product.description}
+          </Text>
+        )}
       </div>
     </div>
   )
