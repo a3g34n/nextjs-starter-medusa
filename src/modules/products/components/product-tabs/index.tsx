@@ -45,10 +45,10 @@ const ProductInfoTab = ({ product }: ProductTabsProps) => {
   return (
     <div className="text-small-regular py-8">
       <div className="flex flex-col gap-y-6">
-        {product.description && (
+        {product.hs_code && (
           <div>
             <span className="font-semibold">AÇIKLAMA</span>
-            <p className="mt-1 whitespace-pre-line">{product.description}</p>
+            <p className="mt-1 whitespace-pre-line">{product.hs_code}</p>
           </div>
         )}
         {product.material && (
@@ -63,18 +63,10 @@ const ProductInfoTab = ({ product }: ProductTabsProps) => {
             <p className="mt-1 whitespace-pre-line">{product.mid_code}</p>
           </div>
         )}
-        {product.origin_country && (
-          <div>
-            <span className="font-semibold">MENŞEİ</span>
-            <p className="mt-1">{product.origin_country}</p>
-          </div>
-        )}
-        {product.hs_code && (
-          <div>
-            <span className="font-semibold">HS KODU</span>
-            <p className="mt-1">{product.hs_code}</p>
-          </div>
-        )}
+        <div>
+          <span className="font-semibold">MENŞEİ</span>
+          <p className="mt-1">Türkiye</p>
+        </div>
       </div>
     </div>
   )
