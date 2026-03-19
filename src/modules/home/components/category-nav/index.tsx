@@ -3,8 +3,7 @@
 import { useEffect, useState } from "react"
 
 const categories = [
-  { name: "İNDİRİM", sectionId: "section-indirim" },
-  { name: "YENİLER", sectionId: "section-yeniler" },
+  { name: "MAĞAZA", sectionId: "section-indirim" },
   { name: "KOLEKSİYON", sectionId: "section-koleksiyon" },
 ]
 
@@ -31,8 +30,7 @@ const CategoryNav = () => {
               setIsVisible(true)
               // Update active index based on section
               if (entry.target.id === "section-indirim") setActiveIndex(0)
-              if (entry.target.id === "section-yeniler") setActiveIndex(1)
-              if (entry.target.id === "section-koleksiyon") setActiveIndex(2)
+              if (entry.target.id === "section-koleksiyon") setActiveIndex(1)
             }
           }
         })
@@ -42,7 +40,7 @@ const CategoryNav = () => {
       }
     )
 
-    const sections = ["section-indirim", "section-yeniler", "section-koleksiyon", "footer"]
+    const sections = ["section-indirim", "section-koleksiyon", "footer"]
     sections.forEach(id => {
       const el = document.getElementById(id)
       if (el) observer.observe(el)

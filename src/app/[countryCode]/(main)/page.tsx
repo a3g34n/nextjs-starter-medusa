@@ -22,20 +22,12 @@ export default async function Home(props: {
       {/* Section 1: Video Hero with İNDİRİM */}
       <Hero />
 
-      {/* Section 2: YENİLER - Single Full Image */}
+      {/* Section 2: KOLEKSİYON */}
       <FullscreenSection
-        sectionId="section-yeniler"
+        sectionId="section-koleksiyon"
         singleImageSrc="/images/section-2.png"
         mobileImageSrc="/images/section-2-mobile.png"
         activeIndex={1}
-      />
-
-      {/* Section 3: KOLEKSİYON - Living Room */}
-      <FullscreenSection
-        sectionId="section-koleksiyon"
-        singleImageSrc="/images/section-3.jpg"
-        mobileImageSrc="/images/section-3-mobile.jpg"
-        activeIndex={2}
       />
 
       {/* Sticky Navigation Overlay */}
