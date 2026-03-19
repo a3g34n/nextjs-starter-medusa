@@ -36,11 +36,7 @@ const Hero = () => {
       {/* Dark overlay for better text contrast */}
       <div className="absolute inset-0 bg-black/20" />
 
-      <div className="absolute bottom-8 left-0 right-0 z-10 pointer-events-none">
-        <p className="text-center text-white/70 text-xs mb-4 px-4">
-          İndirim 1 Ocak 20:00&apos;da online&apos;da başlayıp 2 Mart&apos;ta bitiyor. İndirim seçili ürünlerde stoklarla sınırlıdır.
-        </p>
-      </div>
+      
     </section>
   )
 }
