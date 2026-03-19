@@ -91,7 +91,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
       </div>
 
       <div
-        className="content-container my-16 small:my-32"
+        className="content-container mt-2 mb-16 small:mt-4 small:mb-32"
         data-testid="related-products-container"
       >
         <Suspense fallback={<SkeletonRelatedProducts />}>

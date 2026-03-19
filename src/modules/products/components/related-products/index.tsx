@@ -1,6 +1,6 @@
 import { listProducts } from "@lib/data/products"
 import { getRegion } from "@lib/data/regions"
-import { getDictionary } from "@lib/util/dictionary"
+
 import { HttpTypes } from "@medusajs/types"
 import Product from "../product-preview"
 
@@ -14,7 +14,7 @@ export default async function RelatedProducts({
   countryCode,
 }: RelatedProductsProps) {
   const region = await getRegion(countryCode)
-  const dict = getDictionary(countryCode)
+
 
   if (!region) {
     return null
@@ -50,13 +50,10 @@ export default async function RelatedProducts({
 
   return (
     <div className="product-page-constraint">
-      <div className="flex flex-col items-center text-center mb-16">
-        <span className="text-base-regular text-gray-600 mb-6">
-          {dict.products.related_products}
+      <div className="flex items-center text-center mb-3">
+        <span className="text-base-regular text-ui-fg-base">
+          Benzerler
         </span>
-        <p className="text-2xl-regular text-ui-fg-base max-w-lg">
-          {dict.products.related_products_subtitle}
-        </p>
       </div>
 
       <ul className="grid grid-cols-2 small:grid-cols-3 medium:grid-cols-4 gap-x-6 gap-y-8">
