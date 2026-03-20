@@ -184,7 +184,7 @@ const SideMenu = ({ regions: _regions, locales: _locales, currentLocale, diction
         <div
           data-testid="nav-menu-popup"
           data-darkreader-ignore="true"
-          className="flex flex-col h-full px-8 pb-8 md:py-6"
+          className="flex flex-col h-full px-8 pb-8 md:pt-14 md:pb-6"
         >
           {/* Main Menu */}
           <div className="flex-1 space-y-8 md:space-y-6">
@@ -192,20 +192,20 @@ const SideMenu = ({ regions: _regions, locales: _locales, currentLocale, diction
             <div>
               <LocalizedClientLink
                 href="/store"
-                className="block text-xl md:text-base tracking-wide uppercase"
+                className="block text-xl md:text-lg tracking-wide uppercase"
                 style={{ color: '#111111' }}
                 onClick={close}
               >
                 {isTr ? "Mağaza" : "Store"}
               </LocalizedClientLink>
               {topCategories.length > 0 && (
-                <div className="mt-3 space-y-2 pl-5 md:mt-2 md:space-y-1 md:pl-4">
+                <div className="mt-3 space-y-2 pl-5 md:mt-2 md:space-y-0.5 md:pl-4">
                   {topCategories.map((cat) => (
                     <LocalizedClientLink
                       key={cat.id}
                       href={`/categories/${cat.handle}`}
                       className="block text-sm tracking-wide uppercase"
-                      style={{ color: '#555555' }}
+                      style={{ color: '#999999' }}
                       onClick={close}
                     >
                       {cat.name}
@@ -219,20 +219,20 @@ const SideMenu = ({ regions: _regions, locales: _locales, currentLocale, diction
             <div>
               <LocalizedClientLink
                 href="/store"
-                className="block text-xl md:text-base tracking-wide uppercase"
+                className="block text-xl md:text-lg tracking-wide uppercase"
                 style={{ color: '#111111' }}
                 onClick={close}
               >
                 {isTr ? "Koleksiyonlar" : "Collections"}
               </LocalizedClientLink>
               {collections.length > 0 && (
-                <div className="mt-3 space-y-2 pl-5 md:mt-2 md:space-y-1 md:pl-4">
+                <div className="mt-3 space-y-2 pl-5 md:mt-2 md:space-y-0.5 md:pl-4">
                   {collections.map((col) => (
                     <LocalizedClientLink
                       key={col.id}
                       href={`/collections/${col.handle}`}
                       className="block text-sm tracking-wide uppercase"
-                      style={{ color: '#555555' }}
+                      style={{ color: '#999999' }}
                       onClick={close}
                     >
                       {col.title}
@@ -246,7 +246,7 @@ const SideMenu = ({ regions: _regions, locales: _locales, currentLocale, diction
             <div>
               <LocalizedClientLink
                 href="/hakkimizda"
-                className="block text-xl md:text-base tracking-wide uppercase"
+                className="block text-xl md:text-lg tracking-wide uppercase"
                 style={{ color: '#111111' }}
                 onClick={close}
               >
