@@ -38,6 +38,7 @@ export default function ProductActions({
   const [options, setOptions] = useState<Record<string, string | undefined>>({})
   const [isAdding, setIsAdding] = useState(false)
   const [initials, setInitials] = useState("")
+  const [showOptionWarnings, setShowOptionWarnings] = useState(false)
   const countryCode = useParams().countryCode as string
 
   // If there is only 1 variant, preselect the options
@@ -123,7 +124,10 @@ export default function ProductActions({
 
   // add the selected variant to the cart
   const handleAddToCart = async () => {
-    if (!selectedVariant?.id) return null
+    if (!selectedVariant?.id) {
+      setShowOptionWarnings(true)
+      return null
+    }
 
     setIsAdding(true)
 
@@ -146,16 +150,25 @@ export default function ProductActions({
           {(product.variants?.length ?? 0) > 1 && (
             <div className="flex flex-col gap-y-2 mt-2">
               {(product.options || []).map((option) => {
+                const isMissing = showOptionWarnings && !options[option.id]
                 return (
                   <div key={option.id}>
                     <OptionSelect
                       option={option}
                       current={options[option.id]}
-                      updateOption={setOptionValue}
+                      updateOption={(id, value) => {
+                        setOptionValue(id, value)
+                        setShowOptionWarnings(false)
+                      }}
                       title={option.title ?? ""}
                       data-testid="product-options"
                       disabled={!!disabled || isAdding}
                     />
+                    {isMissing && (
+                      <p className="text-red-500 text-xs mt-1">
+                        Lütfen {option.title} seçiniz
+                      </p>
+                    )}
                   </div>
                 )
               })}
@@ -182,23 +195,13 @@ export default function ProductActions({
 
         <Button
           onClick={handleAddToCart}
-          disabled={
-            !inStock ||
-            !selectedVariant ||
-            !!disabled ||
-            isAdding ||
-            !isValidVariant
-          }
+          disabled={!!disabled || isAdding || (!!selectedVariant && !inStock)}
           variant="primary"
           className="w-full h-10"
           isLoading={isAdding}
           data-testid="add-product-button"
         >
-          {!selectedVariant || !isValidVariant
-            ? "Seçenek seçin"
-            : !inStock
-            ? "Stokta yok"
-            : "Sepete ekle"}
+          {selectedVariant && !inStock ? "Stokta yok" : "Sepete ekle"}
         </Button>
         <MobileActions
           product={product}
