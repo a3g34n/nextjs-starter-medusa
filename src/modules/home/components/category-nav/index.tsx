@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react"
 
 const categories = [
-  { name: "MAĞAZA", sectionId: "section-indirim" },
-  { name: "KOLEKSİYON", sectionId: "section-koleksiyon" },
+  { name: "KOLEKSİYON", sectionId: "section-indirim" },
+  { name: "KİŞİSELLEŞTİRME", sectionId: "section-koleksiyon" },
 ]
 
 const CategoryNav = () => {
