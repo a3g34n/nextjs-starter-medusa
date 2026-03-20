@@ -3,27 +3,55 @@
 import { usePathname } from "next/navigation"
 import { clx } from "@medusajs/ui"
 import { useHeaderHover } from "@lib/context/header-hover-context"
+import { useEffect, useRef, useState } from "react"
 
 export default function NavClient({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const { isHovered, setNavHovered } = useHeaderHover()
-  
-  // Check if current path is homepage (root or country root e.g., /us, /tr)
-  // Regex matches "/" or "/xx" where xx is 2 letters
-  const isHome = pathname === "/" || /^\/[a-z]{2}$/.test(pathname)
+  const [searchRowVisible, setSearchRowVisible] = useState(true)
+  const [mobileScrolledPast, setMobileScrolledPast] = useState(false)
+  const lastScrollY = useRef(0)
 
-  // Hide nav on mobile for product detail pages (custom overlay is shown instead)
+  const isHome = pathname === "/" || /^\/[a-z]{2}$/.test(pathname)
   const isProductPage = /^\/[a-z]{2}\/products\/[^/]+/.test(pathname)
+  const isStorePage = /\/(store|categories)/.test(pathname)
+
+  useEffect(() => {
+    setSearchRowVisible(true)
+    setMobileScrolledPast(false)
+    lastScrollY.current = 0
+  }, [pathname])
+
+  useEffect(() => {
+    if (!isStorePage) return
+
+    const handleScroll = () => {
+      if (window.innerWidth >= 768) return
+      const currentY = window.scrollY
+      if (currentY < 10) {
+        setSearchRowVisible(true)
+        setMobileScrolledPast(false)
+      } else {
+        setMobileScrolledPast(true)
+        setSearchRowVisible(currentY < lastScrollY.current)
+      }
+      lastScrollY.current = currentY
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [isStorePage])
 
   return (
     <div
       className={clx("fixed top-0 inset-x-0 z-50", isProductPage && "hidden small:block")}
       onMouseEnter={() => setNavHovered(true)}
       onMouseLeave={() => setNavHovered(false)}
+      data-search-row-visible={searchRowVisible}
     >
       <header className={clx(
         "relative h-auto md:h-20 mx-auto duration-300 transition-all",
-        isHovered ? "bg-white" : "bg-transparent"
+        isHovered || (isStorePage && mobileScrolledPast && searchRowVisible) ? "bg-white" : "bg-transparent"
       )}>
         <nav
           className={clx(
@@ -33,6 +61,7 @@ export default function NavClient({ children }: { children: React.ReactNode }) {
               "text-gray-900": !isHome || isHovered,
             }
           )}
+          data-search-hidden={isStorePage && !searchRowVisible ? "true" : undefined}
         >
           {children}
         </nav>

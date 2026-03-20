@@ -7,6 +7,7 @@ import LocalizedClientLink from "@modules/common/components/localized-client-lin
 import CartButton from "@modules/layout/components/cart-button"
 import SideMenu from "@modules/layout/components/side-menu"
 import SearchModal from "@modules/search/components/search-modal"
+import MobileSearchRow from "@modules/layout/components/mobile-search-row"
 import NavClient from "./nav-client"
 
 import { retrieveCustomer } from "@lib/data/customer"
@@ -118,9 +119,7 @@ export default async function Nav({ dictionary, countryCode }: { dictionary: any
         </div>
 
         {/* Bottom Row: Search (Mobile Only) */}
-        <div className="md:hidden w-full pb-4 px-1">
-          <SearchModal mobile dictionary={t} />
-        </div>
+        <MobileSearchRow dictionary={t} />
       </div>
     </NavClient>
   )

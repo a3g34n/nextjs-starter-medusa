@@ -30,7 +30,7 @@ const StoreTemplate = async ({
 
   return (
     <div className="flex flex-col py-6 pt-0 content-container relative" data-testid="category-container">
-      <div className="h-28 w-full"></div>
+      <div className="h-32 md:h-28 w-full"></div>
 
       <StoreSubHeader>
         {/* Desktop layout */}

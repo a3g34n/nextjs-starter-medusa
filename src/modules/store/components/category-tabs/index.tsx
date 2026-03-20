@@ -26,11 +26,13 @@ const CategoryTabs = ({ categories, mobile }: CategoryTabsProps) => {
     }
   }
 
+  const textSize = mobile ? "text-[9px]" : "text-sm"
+
   const links = (
     <>
       <LocalizedClientLink
         href="/store"
-        className={`text-[9px] tracking-wider uppercase hover:text-gray-600 transition-colors whitespace-nowrap ${
+        className={`${textSize} tracking-wider uppercase hover:text-gray-600 transition-colors whitespace-nowrap ${
           isActive("store") ? "border-b border-black pb-1 text-black" : "border-b border-transparent pb-1 text-gray-500"
         }`}
       >
@@ -40,7 +42,7 @@ const CategoryTabs = ({ categories, mobile }: CategoryTabsProps) => {
         <LocalizedClientLink
           key={c.id}
           href={`/categories/${c.handle}`}
-          className={`text-[9px] tracking-wider uppercase hover:text-gray-600 transition-colors whitespace-nowrap ${
+          className={`${textSize} tracking-wider uppercase hover:text-gray-600 transition-colors whitespace-nowrap ${
             isActive(c.handle) ? "border-b border-black pb-1 text-black" : "border-b border-transparent pb-1 text-gray-500"
           }`}
         >
