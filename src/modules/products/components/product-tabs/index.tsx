@@ -45,10 +45,10 @@ const ProductInfoTab = ({ product }: ProductTabsProps) => {
   return (
     <div className="text-small-regular py-8">
       <div className="flex flex-col gap-y-6">
-        {product.hs_code && (
+        {product.metadata?.custom_description && (
           <div>
             <span className="font-semibold">AÇIKLAMA</span>
-            <p className="mt-1 whitespace-pre-line">{product.hs_code}</p>
+            <p className="mt-1 whitespace-pre-line">{product.metadata.custom_description as string}</p>
           </div>
         )}
         {product.material && (
@@ -57,10 +57,10 @@ const ProductInfoTab = ({ product }: ProductTabsProps) => {
             <p className="mt-1">{product.material}</p>
           </div>
         )}
-        {product.mid_code && (
+        {product.metadata?.care_instructions && (
           <div>
             <span className="font-semibold">BAKIM</span>
-            <p className="mt-1 whitespace-pre-line">{product.mid_code}</p>
+            <p className="mt-1 whitespace-pre-line">{product.metadata.care_instructions as string}</p>
           </div>
         )}
         <div>

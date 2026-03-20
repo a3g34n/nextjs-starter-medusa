@@ -119,6 +119,8 @@ export default function ProductActions({
   const actionsRef = useRef<HTMLDivElement>(null)
 
 
+  const allowsCustomization = product.metadata?.allows_customization === true
+
   // add the selected variant to the cart
   const handleAddToCart = async () => {
     if (!selectedVariant?.id) return null
@@ -129,6 +131,7 @@ export default function ProductActions({
       variantId: selectedVariant.id,
       quantity: 1,
       countryCode,
+      ...(allowsCustomization && initials ? { metadata: { initials } } : {}),
     })
 
     setIsAdding(false)
@@ -156,21 +159,23 @@ export default function ProductActions({
                   </div>
                 )
               })}
-              <div className="flex flex-col gap-y-2">
-                <span className="text-xs font-semibold tracking-widest uppercase">
-                  Başharfleriniz <span className="text-red-500">*</span>
-                </span>
-                <input
-                  type="text"
-                  value={initials}
-                  onChange={(e) => setInitials(e.target.value.toUpperCase().slice(0, 3))}
-                  placeholder="XXX"
-                  maxLength={3}
-                  className="border border-gray-200 h-9 px-3 text-xs tracking-widest uppercase placeholder:text-gray-300 focus:outline-none focus:border-gray-800 transition-all w-full"
-                  disabled={!!disabled || isAdding}
-                />
-              </div>
               <Divider />
+            </div>
+          )}
+          {allowsCustomization && (
+            <div className="flex flex-col gap-y-2 mt-2">
+              <span className="text-xs font-semibold tracking-widest uppercase">
+                Başharfleriniz <span className="text-red-500">*</span>
+              </span>
+              <input
+                type="text"
+                value={initials}
+                onChange={(e) => setInitials(e.target.value.toUpperCase().slice(0, 3))}
+                placeholder="XXX"
+                maxLength={3}
+                className="border border-gray-200 h-9 px-3 text-xs tracking-widest uppercase placeholder:text-gray-300 focus:outline-none focus:border-gray-800 transition-all w-full"
+                disabled={!!disabled || isAdding}
+              />
             </div>
           )}
         </div>
