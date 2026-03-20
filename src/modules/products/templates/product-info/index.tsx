@@ -21,7 +21,7 @@ const ProductInfo = ({ product, hideDescription }: ProductInfoProps) => {
         )}
         <Heading
           level="h2"
-          className="text-lg leading-6 text-ui-fg-base"
+          className="text-lg lg:text-2xl leading-6 lg:leading-8 text-ui-fg-base"
           data-testid="product-title"
         >
           {product.title}
@@ -29,7 +29,7 @@ const ProductInfo = ({ product, hideDescription }: ProductInfoProps) => {
 
         {!hideDescription && (
           <Text
-            className="text-medium text-ui-fg-subtle whitespace-pre-line"
+            className="text-xs lg:text-sm text-ui-fg-subtle whitespace-pre-line mt-4 lg:mt-6"
             data-testid="product-description"
           >
             {product.description}
