@@ -178,7 +178,7 @@ export default function ProductActions({
           {allowsCustomization && (
             <div className="flex flex-col gap-y-2 mt-2">
               <span className="text-xs font-semibold tracking-widest uppercase">
-                Başharfleriniz <span className="text-red-500">*</span>
+                {product.metadata?.customization_label as string ?? "Başharfleriniz"} <span className="text-red-500">*</span>
               </span>
               <input
                 type="text"
