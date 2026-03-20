@@ -52,7 +52,7 @@ export default async function RelatedProducts({
     <div className="product-page-constraint">
       <div className="flex items-center text-center mb-3">
         <span className="text-base-regular text-ui-fg-base">
-          Benzerler
+          İLGİNİZİ ÇEKEBİLİR
         </span>
       </div>
 

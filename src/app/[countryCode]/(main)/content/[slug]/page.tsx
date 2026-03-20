@@ -1,5 +1,6 @@
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
+import AboutPage from "@modules/about"
 
 type Props = {
   params: Promise<{
@@ -11,7 +12,7 @@ type Props = {
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params
   const { slug } = params
-  
+
   const contentMap: Record<string, string> = {
     "about": "Hakkımızda",
     "terms": "Satın Alma Koşulları",
@@ -28,22 +29,16 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   }
 }
 
+
 export default async function ContentPage(props: Props) {
   const params = await props.params
   const { slug } = params
 
-  // This is a simple static content mapping for demonstration.
-  // In a real application, you might fetch this from a CMS or Medusa.
+  if (slug === "about") {
+    return <AboutPage />
+  }
+
   const content: Record<string, { title: string; body: React.ReactNode }> = {
-    "about": {
-      title: "Hakkımızda",
-      body: (
-        <>
-          <p>LounjStudio, modern yaşam tarzını yansıtan, konfor ve şıklığı bir araya getiren bir moda markasıdır.</p>
-          <p>Kaliteli kumaşlar, özenli tasarımlar ve sürdürülebilir üretim anlayışıyla sizlere en iyisini sunmayı hedefliyoruz.</p>
-        </>
-      )
-    },
     "terms": {
       title: "Satın Alma Koşulları",
       body: (
