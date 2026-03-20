@@ -89,7 +89,7 @@ export default function ProductActions({
       params.delete("v_id")
     }
 
-    router.replace(pathname + "?" + params.toString())
+    router.replace(pathname + "?" + params.toString(), { scroll: false })
   }, [selectedVariant, isValidVariant])
 
   // check if the selected variant is in stock
@@ -194,9 +194,9 @@ export default function ProductActions({
           isLoading={isAdding}
           data-testid="add-product-button"
         >
-          {!selectedVariant && !options
+          {!selectedVariant || !isValidVariant
             ? "Seçenek seçin"
-            : !inStock || !isValidVariant
+            : !inStock
             ? "Stokta yok"
             : "Sepete ekle"}
         </Button>

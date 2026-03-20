@@ -81,11 +81,11 @@ const SideMenu = ({ regions: _regions, locales: _locales, currentLocale, diction
       <div className="h-full flex items-center">
         <div className="h-full flex items-center gap-x-2 md:gap-x-6">
           <button className="relative h-full flex items-center focus:outline-none">
-            <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
-          <div className="w-[220px] sm:w-[280px] md:w-[380px]">
+          <div className="w-[160px] sm:w-[280px] md:w-[380px]">
             <Image src={logoSrc} alt="LOUNJ Studio" height={80} width={380} className="object-contain w-full h-auto mt-2" />
           </div>
         </div>
@@ -108,18 +108,18 @@ const SideMenu = ({ regions: _regions, locales: _locales, currentLocale, diction
         >
           <div className="md:hidden">
             {isOpen ? (
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-7 h-7">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 md:w-7 md:h-7">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
               </svg>
             ) : (
-              <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             )}
           </div>
           <div className="hidden md:block">
             {!isOpen && (
-              <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             )}
@@ -133,7 +133,7 @@ const SideMenu = ({ regions: _regions, locales: _locales, currentLocale, diction
           data-testid="nav-store-link"
           onClick={close}
         >
-          <div className="w-[220px] sm:w-[280px] md:w-[380px]">
+          <div className="w-[160px] sm:w-[280px] md:w-[380px]">
             <Image
               src={logoSrc}
               alt="LOUNJ Studio"
