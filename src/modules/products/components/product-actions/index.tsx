@@ -197,7 +197,7 @@ export default function ProductActions({
           onClick={handleAddToCart}
           disabled={!!disabled || isAdding || (!!selectedVariant && !inStock)}
           variant="primary"
-          className="w-full h-10"
+          className="w-full h-10 mt-4"
           isLoading={isAdding}
           data-testid="add-product-button"
         >
