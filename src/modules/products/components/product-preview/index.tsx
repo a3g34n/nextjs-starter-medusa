@@ -36,6 +36,7 @@ export default async function ProductPreview({
           images={product.images}
           size="full"
           isFeatured={isFeatured}
+          isCustomizable={product.metadata?.allows_customization === true || product.metadata?.allows_customization === "true"}
         />
         <div className="flex flex-col mt-3 gap-y-1">
           <Text className="text-xs tracking-wide uppercase text-ui-fg-subtle" data-testid="product-title">

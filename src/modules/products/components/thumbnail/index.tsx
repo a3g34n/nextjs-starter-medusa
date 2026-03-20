@@ -10,6 +10,7 @@ type ThumbnailProps = {
   images?: any[] | null
   size?: "small" | "medium" | "large" | "full" | "square"
   isFeatured?: boolean
+  isCustomizable?: boolean
   className?: string
   "data-testid"?: string
 }
@@ -19,6 +20,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
   images,
   size = "small",
   isFeatured,
+  isCustomizable,
   className,
   "data-testid": dataTestid,
 }) => {
@@ -55,6 +57,11 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
             fill
           />
         </div>
+      )}
+      {isCustomizable && (
+        <span className="absolute top-2 left-2 bg-black text-white text-[10px] font-medium tracking-wide uppercase px-2 py-1 rounded-sm z-10">
+          KİŞİSELLEŞTİR
+        </span>
       )}
     </Container>
   )
