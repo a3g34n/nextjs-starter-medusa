@@ -14,7 +14,7 @@ export default function NavClient({ children }: { children: React.ReactNode }) {
 
   const isHome = pathname === "/" || /^\/[a-z]{2}$/.test(pathname)
   const isProductPage = /^\/[a-z]{2}\/products\/[^/]+/.test(pathname)
-  const isStorePage = /\/(store|categories)/.test(pathname)
+  const isStorePage = /\/(store|categories|collections)/.test(pathname)
 
   useEffect(() => {
     setSearchRowVisible(true)

@@ -55,13 +55,6 @@ export default async function CollectionTemplate({
 
         {/* Mobile layout */}
         <div className="block small:hidden">
-          <div className="text-xs text-gray-500 uppercase tracking-widest px-2 py-2">
-            <LocalizedClientLink href="/" className="hover:text-black">ANASAYFA</LocalizedClientLink>
-            <span className="mx-2">/</span>
-            <LocalizedClientLink href="/collections" className="hover:text-black">KOLEKSİYONLAR</LocalizedClientLink>
-            <span className="mx-2">/</span>
-            <span className="text-black">{collection.title.toUpperCase()}</span>
-          </div>
           <div className="w-full border-b border-gray-100 px-2">
             <CollectionTabs collections={collections} mobile />
           </div>

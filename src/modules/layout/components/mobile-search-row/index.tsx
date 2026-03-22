@@ -10,7 +10,7 @@ export default function MobileSearchRow({ dictionary }: { dictionary: any }) {
   const [visible, setVisible] = useState(true)
   const lastScrollY = useRef(0)
 
-  const isStorePage = /\/(store|categories)/.test(pathname)
+  const isStorePage = /\/(store|categories|collections)/.test(pathname)
 
   useEffect(() => {
     setVisible(true)
