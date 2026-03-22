@@ -218,16 +218,16 @@ const SideMenu = ({ regions: _regions, locales: _locales, currentLocale, diction
             {/* KOLEKSİYONLAR */}
             <div>
               <LocalizedClientLink
-                href="/store"
+                href="/collections"
                 className="block text-xl md:text-lg tracking-wide uppercase"
                 style={{ color: '#111111' }}
                 onClick={close}
               >
                 {isTr ? "Koleksiyonlar" : "Collections"}
               </LocalizedClientLink>
-              {collections.length > 0 && (
+              {collections.filter(col => col.handle !== "kisisellestirme").length > 0 && (
                 <div className="mt-3 space-y-2 pl-5 md:mt-2 md:space-y-0.5 md:pl-4">
-                  {collections.map((col) => (
+                  {collections.filter(col => col.handle !== "kisisellestirme").map((col) => (
                     <LocalizedClientLink
                       key={col.id}
                       href={`/collections/${col.handle}`}
@@ -240,6 +240,18 @@ const SideMenu = ({ regions: _regions, locales: _locales, currentLocale, diction
                   ))}
                 </div>
               )}
+            </div>
+
+            {/* KİŞİSELLEŞTİRME */}
+            <div>
+              <LocalizedClientLink
+                href="/collections/kisisellestirme"
+                className="block text-xl md:text-lg tracking-wide"
+                style={{ color: '#111111' }}
+                onClick={close}
+              >
+                KİŞİSELLEŞTİRME
+              </LocalizedClientLink>
             </div>
 
             {/* HAKKIMIZDA */}
