@@ -31,7 +31,7 @@ const Summary = ({ cart, dictionary }: SummaryProps) => {
   return (
     <div className="flex flex-col gap-y-4">
       <Heading level="h2" className="text-[2rem] leading-[2.75rem]">
-        {dictionary?.cart?.order_summary ?? "Summary"}
+        {dictionary?.cart?.order_summary ?? "Özet"}
       </Heading>
       <DiscountCode cart={cart} />
       <Divider />
@@ -40,7 +40,7 @@ const Summary = ({ cart, dictionary }: SummaryProps) => {
         href={"/checkout?step=" + step}
         data-testid="checkout-button"
       >
-        <Button className="w-full h-10">{dictionary?.cart?.checkout_btn ?? "Go to checkout"}</Button>
+        <Button className="w-full h-10">{dictionary?.cart?.checkout_btn ?? "Ödemeye Geç"}</Button>
       </LocalizedClientLink>
     </div>
   )

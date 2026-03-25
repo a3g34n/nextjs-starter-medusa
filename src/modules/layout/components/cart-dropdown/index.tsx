@@ -179,7 +179,7 @@ const CartDropdown = ({
                             className="mt-1"
                             data-testid="cart-item-remove-button"
                           >
-                            {dictionary?.common?.remove ?? "Remove"}
+                            {dictionary?.common?.remove ?? "Kaldır"}
                           </DeleteButton>
                         </div>
                       </div>
@@ -188,7 +188,7 @@ const CartDropdown = ({
                 <div className="p-4 flex flex-col gap-y-4 text-small-regular">
                   <div className="flex items-center justify-between">
                     <span className="text-ui-fg-base font-semibold">
-                      {dictionary?.common?.subtotal ?? "Subtotal"}{" "}
+                      {dictionary?.common?.subtotal ?? "Ara Toplam"}{" "}
                       <span className="font-normal">(KDV Hariç)</span>
                     </span>
                     <span
@@ -208,7 +208,7 @@ const CartDropdown = ({
                       size="large"
                       data-testid="go-to-cart-button"
                     >
-                      {dictionary?.cart?.go_to_cart ?? "Go to cart"}
+                      {dictionary?.cart?.go_to_cart ?? "Sepete Git"}
                     </Button>
                   </LocalizedClientLink>
                 </div>
@@ -219,12 +219,12 @@ const CartDropdown = ({
                   <div className="bg-gray-900 text-small-regular flex items-center justify-center w-6 h-6 rounded-full text-white">
                     <span>0</span>
                   </div>
-                  <span>{dictionary?.cart?.empty_title ?? "Your shopping bag is empty."}</span>
+                  <span>{dictionary?.cart?.empty_title ?? "Alışveriş sepetiniz boş."}</span>
                   <div>
                     <LocalizedClientLink href="/store">
                       <>
-                        <span className="sr-only">Go to all products page</span>
-                        <Button onClick={close}>{dictionary?.cart?.empty_cta ?? "Explore products"}</Button>
+                        <span className="sr-only">Tüm ürünler sayfasına git</span>
+                        <Button onClick={close}>{dictionary?.cart?.empty_cta ?? "Ürünleri Keşfet"}</Button>
                       </>
                     </LocalizedClientLink>
                   </div>

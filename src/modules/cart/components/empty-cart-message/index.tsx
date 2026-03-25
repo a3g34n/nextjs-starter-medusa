@@ -9,13 +9,13 @@ const EmptyCartMessage = ({ dictionary }: { dictionary?: any }) => {
         level="h1"
         className="flex flex-row text-3xl-regular gap-x-2 items-baseline"
       >
-        {dictionary?.cart?.title ?? "Cart"}
+        {dictionary?.cart?.title ?? "Sepet"}
       </Heading>
       <Text className="text-base-regular mt-4 mb-6 max-w-[32rem]">
-        {dictionary?.cart?.empty_title ?? "You don't have anything in your cart."} {dictionary?.cart?.empty_message ?? "Let's change that, use the link below to start browsing our products."}
+        {dictionary?.cart?.empty_title ?? "Sepetinizde herhangi bir ürün bulunmuyor."} {dictionary?.cart?.empty_message ?? "Hadi bunu değiştirelim, ürünlerimize göz atmak için aşağıdaki bağlantıyı kullanın."}
       </Text>
       <div>
-        <InteractiveLink href="/store">{dictionary?.cart?.empty_cta ?? "Explore products"}</InteractiveLink>
+        <InteractiveLink href="/store">{dictionary?.cart?.empty_cta ?? "Ürünleri Keşfet"}</InteractiveLink>
       </div>
     </div>
   )
