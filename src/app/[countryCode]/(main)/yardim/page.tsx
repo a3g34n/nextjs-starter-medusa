@@ -66,7 +66,6 @@ export default function HelpPage() {
               </p>
               <p>
                 <strong>E-posta:</strong> info@lounjstudio.com<br/>
-                <strong>Telefon:</strong> +90 212 123 45 67<br/>
                 <strong>Çalışma Saatleri:</strong> Pazartesi - Cuma, 09:00 - 18:00
               </p>
             </div>

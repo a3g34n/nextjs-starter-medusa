@@ -164,7 +164,7 @@ const SideMenu = ({ regions: _regions, locales: _locales, currentLocale, diction
       {isOpen && (
         <div
           className="hidden md:block fixed z-40"
-          style={{ left: '288px', top: '80px', right: 0, bottom: 0, backgroundColor: 'transparent' }}
+          style={{ left: '288px', top: '112px', right: 0, bottom: 0, backgroundColor: 'transparent' }}
           onMouseEnter={close}
           data-testid="side-menu-backdrop"
         />
@@ -175,7 +175,7 @@ const SideMenu = ({ regions: _regions, locales: _locales, currentLocale, diction
         data-darkreader-ignore="true"
         className={`fixed bg-white overflow-y-auto transition-transform duration-300 ease-out
           inset-0 z-[-1] pt-[160px] md:pt-0
-          md:top-20 md:left-0 md:bottom-0 md:w-96 md:h-[calc(100vh-80px)] md:z-50
+          md:top-[112px] md:left-0 md:bottom-0 md:w-96 md:h-[calc(100vh-112px)] md:z-50
         `}
         style={{ transform: isOpen ? 'translateX(0)' : 'translateX(-100%)' }}
         onMouseEnter={open}
@@ -192,7 +192,7 @@ const SideMenu = ({ regions: _regions, locales: _locales, currentLocale, diction
             <div>
               <LocalizedClientLink
                 href="/store"
-                className="block text-xl md:text-lg tracking-wide uppercase"
+                className="block text-xl md:text-sm tracking-wide uppercase"
                 style={{ color: '#111111' }}
                 onClick={close}
               >
@@ -204,7 +204,7 @@ const SideMenu = ({ regions: _regions, locales: _locales, currentLocale, diction
                     <LocalizedClientLink
                       key={cat.id}
                       href={`/categories/${cat.handle}`}
-                      className="block text-sm tracking-wide uppercase"
+                      className="block text-sm md:text-xs tracking-wide uppercase"
                       style={{ color: '#999999' }}
                       onClick={close}
                     >
@@ -219,7 +219,7 @@ const SideMenu = ({ regions: _regions, locales: _locales, currentLocale, diction
             <div>
               <LocalizedClientLink
                 href="/collections"
-                className="block text-xl md:text-lg tracking-wide uppercase"
+                className="block text-xl md:text-sm tracking-wide uppercase"
                 style={{ color: '#111111' }}
                 onClick={close}
               >
@@ -231,7 +231,7 @@ const SideMenu = ({ regions: _regions, locales: _locales, currentLocale, diction
                     <LocalizedClientLink
                       key={col.id}
                       href={`/collections/${col.handle}`}
-                      className="block text-sm tracking-wide uppercase"
+                      className="block text-sm md:text-xs tracking-wide uppercase"
                       style={{ color: '#999999' }}
                       onClick={close}
                     >
@@ -246,7 +246,7 @@ const SideMenu = ({ regions: _regions, locales: _locales, currentLocale, diction
             <div>
               <LocalizedClientLink
                 href="/collections/kisisellestirme"
-                className="block text-xl md:text-lg tracking-wide"
+                className="block text-xl md:text-sm tracking-wide"
                 style={{ color: '#111111' }}
                 onClick={close}
               >
@@ -258,7 +258,7 @@ const SideMenu = ({ regions: _regions, locales: _locales, currentLocale, diction
             <div>
               <LocalizedClientLink
                 href="/hakkimizda"
-                className="block text-xl md:text-lg tracking-wide uppercase"
+                className="block text-xl md:text-sm tracking-wide uppercase"
                 style={{ color: '#111111' }}
                 onClick={close}
               >
@@ -268,7 +268,7 @@ const SideMenu = ({ regions: _regions, locales: _locales, currentLocale, diction
           </div>
 
           {/* Bottom Links */}
-          <div style={{ borderTop: '1px solid #e5e5e5', paddingTop: '1rem' }} className="space-y-3 md:space-y-2">
+          <div style={{ borderTop: '1px solid #e5e5e5', paddingTop: '1rem' }} className="mt-8 md:mt-0 space-y-3 md:space-y-2">
             {bottomLinks.map((link) => (
               <LocalizedClientLink
                 key={link.name}

@@ -5,6 +5,42 @@ import { clx } from "@medusajs/ui"
 import { useHeaderHover } from "@lib/context/header-hover-context"
 import { useEffect, useRef, useState } from "react"
 
+const ANNOUNCEMENTS = [
+  "WELCOME15 KODUYLA %15 İNDİRİM · İLK ALIŞVERİŞE ÖZEL",
+  "3.000 TL VE ÜZERİNE KARGO ÜCRETSİZ",
+]
+
+function AnnouncementBanner() {
+  const [index, setIndex] = useState(0)
+  const [visible, setVisible] = useState(true)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setVisible(false)
+      setTimeout(() => {
+        setIndex((i) => (i + 1) % ANNOUNCEMENTS.length)
+        setVisible(true)
+      }, 400)
+    }, 4000)
+    return () => clearInterval(interval)
+  }, [])
+
+  return (
+    <div className="w-full bg-white text-black text-center py-2 px-4 text-[10px] sm:text-xs tracking-widest font-medium uppercase overflow-hidden">
+      <span
+        style={{
+          display: "inline-block",
+          transition: "opacity 0.4s ease",
+          opacity: visible ? 1 : 0,
+          textDecoration: "underline",
+        }}
+      >
+        {ANNOUNCEMENTS[index]}
+      </span>
+    </div>
+  )
+}
+
 export default function NavClient({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const { isHovered, setNavHovered } = useHeaderHover()
@@ -49,6 +85,7 @@ export default function NavClient({ children }: { children: React.ReactNode }) {
       onMouseLeave={() => setNavHovered(false)}
       data-search-row-visible={searchRowVisible}
     >
+      <AnnouncementBanner />
       <header className={clx(
         "relative h-auto md:h-20 mx-auto duration-300 transition-all",
         isHovered || (isStorePage && mobileScrolledPast && searchRowVisible) ? "bg-white" : "bg-transparent"

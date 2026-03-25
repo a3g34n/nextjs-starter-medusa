@@ -13,6 +13,7 @@ import { HttpTypes } from "@medusajs/types"
 
 import ProductActionsWrapper from "./product-actions-wrapper"
 import MobileProductHeaderServer from "@modules/products/components/mobile-product-header/server"
+import ProductFeatureBadges from "@modules/products/components/product-feature-badges"
 
 type ProductTemplateProps = {
   product: HttpTypes.StoreProduct
@@ -54,6 +55,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
           >
             <ProductActionsWrapper id={product.id} region={region} />
           </Suspense>
+          <ProductFeatureBadges />
           {product.description && (
             <Text
               className="text-xs text-ui-fg-subtle whitespace-pre-line"
@@ -87,6 +89,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
           >
             <ProductActionsWrapper id={product.id} region={region} />
           </Suspense>
+          <ProductFeatureBadges />
         </div>
       </div>
 

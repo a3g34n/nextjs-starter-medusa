@@ -20,7 +20,6 @@ export default function ContactPage() {
             <div className="bg-gray-50 p-8 text-center">
               <h3 className="text-lg font-medium mb-4 uppercase">Müşteri Hizmetleri</h3>
               <p className="mb-2">E-posta: info@lounjstudio.com</p>
-              <p>Telefon: +90 212 123 45 67</p>
               <p className="text-sm text-gray-500 mt-4">Pazartesi - Cuma: 09:00 - 18:00</p>
             </div>
 
