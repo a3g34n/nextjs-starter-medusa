@@ -18,7 +18,7 @@ export default async function Home(props: {
   const dictionary = getDictionary(countryCode)
 
   return (
-    <main className="h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth no-scrollbar">
+    <main className="h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth no-scrollbar -mt-[112px]">
       {/* Section 1: Video Hero with İNDİRİM */}
       <Hero />
 

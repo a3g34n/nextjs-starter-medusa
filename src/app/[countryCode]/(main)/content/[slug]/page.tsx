@@ -86,7 +86,7 @@ export default async function ContentPage(props: Props) {
   }
 
   return (
-    <div className="content-container py-12 small:py-24 pt-[120px] md:pt-32">
+    <div className="content-container py-8">
       <div className="max-w-3xl mx-auto">
         <h1 className="text-3xl font-light tracking-wide mb-12 text-center uppercase">{pageContent.title}</h1>
         <div className="space-y-6 text-gray-600 font-light leading-relaxed">

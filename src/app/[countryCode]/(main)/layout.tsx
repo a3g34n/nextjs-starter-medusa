@@ -43,7 +43,9 @@ export default async function PageLayout(props: { children: React.ReactNode; par
           shippingOptions={shippingOptions}
         />
       )}
-      {props.children}
+      <div className="pt-[112px]">
+        {props.children}
+      </div>
     </HeaderHoverProvider>
   )
 }
