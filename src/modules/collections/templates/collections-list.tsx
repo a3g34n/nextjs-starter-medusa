@@ -118,7 +118,7 @@ export default async function CollectionsListTemplate() {
 
       {/* Breadcrumb + title */}
       <div className="px-4 pt-4 mb-10">
-        <div className="text-xs text-gray-500 uppercase tracking-widest mb-4">
+        <div className="text-[10px] text-gray-500 uppercase tracking-widest mb-4">
           <LocalizedClientLink href="/" className="hover:text-black">ANASAYFA</LocalizedClientLink>
           <span className="mx-2">/</span>
           <span className="text-black border-b border-black">KOLEKSİYONLAR</span>

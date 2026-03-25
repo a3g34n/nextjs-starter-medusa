@@ -35,8 +35,8 @@ const StoreTemplate = async ({
       <StoreSubHeader>
         {/* Desktop layout */}
         <div className="hidden small:flex flex-col relative mb-4 pt-4 px-4 rounded-b-lg">
-          <div className="w-full flex justify-start mb-2">
-            <div className="text-xs text-gray-500 uppercase tracking-widest">
+          <div className="w-full flex justify-start mb-4">
+            <div className="text-[10px] text-gray-500 uppercase tracking-widest">
               <LocalizedClientLink href="/" className="hover:text-black">ANASAYFA</LocalizedClientLink>
               <span className="mx-2">/</span>
               <span className="text-black border-b border-black">MAĞAZA</span>
