@@ -162,7 +162,7 @@ const CartDropdown = ({
                                   data-testid="cart-item-quantity"
                                   data-value={item.quantity}
                                 >
-                                  Qty: {item.quantity}
+                                  Adet: {item.quantity}
                                 </span>
                               </div>
                               <div className="flex justify-end">
@@ -189,7 +189,7 @@ const CartDropdown = ({
                   <div className="flex items-center justify-between">
                     <span className="text-ui-fg-base font-semibold">
                       {dictionary?.common?.subtotal ?? "Subtotal"}{" "}
-                      <span className="font-normal">(excl. taxes)</span>
+                      <span className="font-normal">(KDV Hariç)</span>
                     </span>
                     <span
                       className="text-large-semi"
