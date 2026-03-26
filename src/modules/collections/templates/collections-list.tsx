@@ -114,7 +114,7 @@ export default async function CollectionsListTemplate() {
 
   return (
     <div className="flex flex-col py-6 pt-0 content-container">
-      <div className="h-32 md:h-28 w-full"></div>
+      <div className="h-4 w-full"></div>
 
       {/* Breadcrumb + title */}
       <div className="px-4 pt-4 mb-10">

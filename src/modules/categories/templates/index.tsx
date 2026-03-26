@@ -36,7 +36,7 @@ export default async function CategoryTemplate({
       className="flex flex-col py-6 pt-0 content-container relative"
       data-testid="category-container"
     >
-      <div className="h-28 w-full"></div>
+      <div className="h-4 w-full"></div>
 
       <StoreSubHeader>
         {/* Desktop layout */}

@@ -192,7 +192,7 @@ const SideMenu = ({ regions: _regions, locales: _locales, currentLocale, diction
             <div>
               <LocalizedClientLink
                 href="/store"
-                className="block text-xl md:text-sm tracking-wide uppercase"
+                className="block text-xl md:text-base tracking-wide uppercase"
                 style={{ color: '#111111' }}
                 onClick={close}
               >
@@ -204,7 +204,7 @@ const SideMenu = ({ regions: _regions, locales: _locales, currentLocale, diction
                     <LocalizedClientLink
                       key={cat.id}
                       href={`/categories/${cat.handle}`}
-                      className="block text-sm md:text-xs tracking-wide uppercase"
+                      className="block text-sm md:text-sm tracking-wide uppercase"
                       style={{ color: '#999999' }}
                       onClick={close}
                     >
@@ -219,7 +219,7 @@ const SideMenu = ({ regions: _regions, locales: _locales, currentLocale, diction
             <div>
               <LocalizedClientLink
                 href="/collections"
-                className="block text-xl md:text-sm tracking-wide uppercase"
+                className="block text-xl md:text-base tracking-wide uppercase"
                 style={{ color: '#111111' }}
                 onClick={close}
               >
@@ -231,7 +231,7 @@ const SideMenu = ({ regions: _regions, locales: _locales, currentLocale, diction
                     <LocalizedClientLink
                       key={col.id}
                       href={`/collections/${col.handle}`}
-                      className="block text-sm md:text-xs tracking-wide uppercase"
+                      className="block text-sm md:text-sm tracking-wide uppercase"
                       style={{ color: '#999999' }}
                       onClick={close}
                     >
@@ -246,7 +246,7 @@ const SideMenu = ({ regions: _regions, locales: _locales, currentLocale, diction
             <div>
               <LocalizedClientLink
                 href="/collections/kisisellestirme"
-                className="block text-xl md:text-sm tracking-wide"
+                className="block text-xl md:text-base tracking-wide"
                 style={{ color: '#111111' }}
                 onClick={close}
               >
@@ -258,7 +258,7 @@ const SideMenu = ({ regions: _regions, locales: _locales, currentLocale, diction
             <div>
               <LocalizedClientLink
                 href="/hakkimizda"
-                className="block text-xl md:text-sm tracking-wide uppercase"
+                className="block text-xl md:text-base tracking-wide uppercase"
                 style={{ color: '#111111' }}
                 onClick={close}
               >
