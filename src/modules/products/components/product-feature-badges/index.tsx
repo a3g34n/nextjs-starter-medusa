@@ -17,7 +17,11 @@ const TruckIcon = ({ small }: { small?: boolean }) => (
   </svg>
 )
 
-const badges = [
+const defaultBadges = [
+  {
+    icon: <InformationCircle className="w-5 h-5" />,
+    text: "15 GÜN İÇERİSİNDE KOLAY İADE SİSTEMİ",
+  },
   {
     icon: <TruckIcon />,
     text: "3.000 TL + SİPARİŞLERDE ÜCRETSİZ KARGO",
@@ -30,9 +34,24 @@ const badges = [
     icon: <LockClosedSolid className="w-5 h-5" />,
     text: "3D SECURE GÜVENLİ ONLINE ÖDEME",
   },
+]
+
+const customBadges = [
   {
     icon: <InformationCircle className="w-5 h-5" />,
-    text: "15 GÜN İÇERİSİNDE KOLAY İADE SİSTEMİ",
+    text: "SİZE ÖZEL ÜRETİLİR",
+  },
+  {
+    icon: <TruckIcon />,
+    text: "3.000 TL + SİPARİŞLERDE ÜCRETSİZ KARGO",
+  },
+  {
+    icon: <Tag className="w-5 h-5" />,
+    text: "'WELCOME15' KODU İLE İLK SİPARİŞE %15 İNDİRİM",
+  },
+  {
+    icon: <LockClosedSolid className="w-5 h-5" />,
+    text: "3D SECURE GÜVENLİ ONLINE ÖDEME",
   },
 ]
 
@@ -54,7 +73,8 @@ const BadgeCard = ({ icon, text, mobile }: { icon: React.ReactNode; text: string
   )
 )
 
-const ProductFeatureBadges = () => {
+const ProductFeatureBadges = ({ isCustomizable }: { isCustomizable?: boolean }) => {
+  const activeBadges = isCustomizable ? customBadges : defaultBadges
   return (
     <>
       {/* Mobile: infinite marquee */}
@@ -74,7 +94,7 @@ const ProductFeatureBadges = () => {
           }
         `}</style>
         <div className="marquee-track gap-x-3">
-          {[...badges, ...badges].map((badge, i) => (
+          {[...activeBadges, ...activeBadges].map((badge, i) => (
             <BadgeCard key={i} icon={badge.icon} text={badge.text} mobile />
           ))}
         </div>
@@ -82,7 +102,7 @@ const ProductFeatureBadges = () => {
 
       {/* Desktop: 2×2 grid */}
       <div className="hidden small:grid grid-cols-2 gap-3 w-full">
-        {badges.map((badge, i) => (
+        {activeBadges.map((badge, i) => (
           <BadgeCard key={i} icon={badge.icon} text={badge.text} />
         ))}
       </div>

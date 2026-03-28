@@ -55,7 +55,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
           >
             <ProductActionsWrapper id={product.id} region={region} />
           </Suspense>
-          <ProductFeatureBadges />
+          <ProductFeatureBadges isCustomizable={product.metadata?.allows_customization === true} />
           {product.description && (
             <Text
               className="text-xs text-ui-fg-subtle whitespace-pre-line"
@@ -89,7 +89,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
           >
             <ProductActionsWrapper id={product.id} region={region} />
           </Suspense>
-          <ProductFeatureBadges />
+          <ProductFeatureBadges isCustomizable={product.metadata?.allows_customization === true} />
         </div>
       </div>
 
