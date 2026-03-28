@@ -7,7 +7,7 @@ import StoreSubHeader from "@modules/store/components/store-sub-header"
 import PaginatedProducts from "@modules/store/templates/paginated-products"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import CollectionTabs from "@modules/collections/components/collection-tabs"
-import { listCollections } from "@lib/data/collections"
+import { listCollectionCategories } from "@lib/data/categories"
 import { HttpTypes } from "@medusajs/types"
 
 export default async function CollectionTemplate({
@@ -17,14 +17,14 @@ export default async function CollectionTemplate({
   countryCode,
 }: {
   sortBy?: SortOptions
-  collection: HttpTypes.StoreCollection
+  collection: HttpTypes.StoreProductCategory
   page?: string
   countryCode: string
 }) {
   const pageNumber = page ? parseInt(page) : 1
   const sort = sortBy || "created_at"
 
-  const { collections } = await listCollections()
+  const collections = await listCollectionCategories()
 
   return (
     <div className="flex flex-col py-6 pt-0 content-container relative" data-testid="collection-container">
@@ -39,7 +39,7 @@ export default async function CollectionTemplate({
               <span className="mx-2">/</span>
               <LocalizedClientLink href="/collections" className="hover:text-black">KOLEKSİYONLAR</LocalizedClientLink>
               <span className="mx-2">/</span>
-              <span className="text-black border-b border-black">{collection.title.toUpperCase()}</span>
+              <span className="text-black border-b border-black">{collection.name.toUpperCase()}</span>
             </div>
           </div>
           <div className="flex items-center justify-between w-full relative">
@@ -75,7 +75,7 @@ export default async function CollectionTemplate({
           <PaginatedProducts
             sortBy={sort}
             page={pageNumber}
-            collectionId={collection.id}
+            categoryId={collection.id}
             countryCode={countryCode}
           />
         </Suspense>

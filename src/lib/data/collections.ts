@@ -1,57 +1,39 @@
 "use server"
 
-import { sdk } from "@lib/config"
 import { HttpTypes } from "@medusajs/types"
+import {
+  COLLECTIONS_CATEGORY_ID,
+  listCollectionCategories,
+} from "./categories"
+import { sdk } from "@lib/config"
 import { getCacheOptions } from "./cookies"
 
-export const retrieveCollection = async (id: string) => {
-  const next = {
-    ...(await getCacheOptions("collections")),
-  }
-
-  return sdk.client
-    .fetch<{ collection: HttpTypes.StoreCollection }>(
-      `/store/collections/${id}`,
-      {
-        next,
-        cache: "force-cache",
-      }
-    )
-    .then(({ collection }) => collection)
-}
-
 export const listCollections = async (
-  queryParams: Record<string, string> = {}
-): Promise<{ collections: HttpTypes.StoreCollection[]; count: number }> => {
-  const next = {
-    ...(await getCacheOptions("collections")),
-  }
-
-  queryParams.limit = queryParams.limit || "100"
-  queryParams.offset = queryParams.offset || "0"
-
-  return sdk.client
-    .fetch<{ collections: HttpTypes.StoreCollection[]; count: number }>(
-      "/store/collections",
-      {
-        query: queryParams,
-        next: { ...next, revalidate: 900 },
-      }
-    )
-    .then(({ collections, count }) => ({ collections, count }))
+  queryParams: Record<string, any> = {}
+): Promise<{ collections: HttpTypes.StoreProductCategory[]; count: number }> => {
+  const categories = await listCollectionCategories(queryParams)
+  return { collections: categories, count: categories.length }
 }
 
 export const getCollectionByHandle = async (
   handle: string
-): Promise<HttpTypes.StoreCollection> => {
+): Promise<HttpTypes.StoreProductCategory> => {
   const next = {
-    ...(await getCacheOptions("collections")),
+    ...(await getCacheOptions("categories")),
+    revalidate: 60,
   }
 
   return sdk.client
-    .fetch<HttpTypes.StoreCollectionListResponse>(`/store/collections`, {
-      query: { handle, fields: "*products" },
-      next: { ...next, revalidate: 900 },
-    })
-    .then(({ collections }) => collections[0])
+    .fetch<{ product_categories: HttpTypes.StoreProductCategory[] }>(
+      "/store/product-categories",
+      {
+        query: {
+          fields: "*category_children, *products",
+          handle,
+          parent_category_id: COLLECTIONS_CATEGORY_ID,
+        },
+        next,
+      }
+    )
+    .then(({ product_categories }) => product_categories[0])
 }

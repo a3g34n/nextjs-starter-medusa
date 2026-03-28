@@ -1,4 +1,4 @@
-import { listCollections } from "@lib/data/collections"
+import { listCollectionCategories } from "@lib/data/categories"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import Image from "next/image"
 import PlaceholderImage from "@modules/common/icons/placeholder-image"
@@ -108,9 +108,7 @@ function CollectionMosaic({ thumbnails, title }: { thumbnails: string[], title: 
 }
 
 export default async function CollectionsListTemplate() {
-  const { collections } = await listCollections({
-    fields: "*products,+products.thumbnail",
-  })
+  const collections = await listCollectionCategories()
 
   return (
     <div className="flex flex-col py-6 pt-0 content-container">
@@ -141,12 +139,12 @@ export default async function CollectionsListTemplate() {
             >
               {/* Card image area — fixed aspect, mosaic inside */}
               <div className="relative aspect-[4/3] overflow-hidden bg-gray-100">
-                <CollectionMosaic thumbnails={thumbnails} title={col.title} />
+                <CollectionMosaic thumbnails={thumbnails} title={col.name} />
               </div>
 
               <div className="flex items-center justify-between">
                 <span className="text-sm uppercase tracking-widest group-hover:text-gray-500 transition-colors">
-                  {col.title}
+                  {col.name}
                 </span>
                 <span className="text-xs text-gray-400">
                   {col.products?.length ? `${col.products.length} ürün` : "Yakında"}

@@ -15,7 +15,7 @@ type SideMenuProps = {
   currentLocale: string | null
   dictionary: any
   categories: HttpTypes.StoreProductCategory[]
-  collections: HttpTypes.StoreCollection[]
+  collections: HttpTypes.StoreProductCategory[]
 }
 
 const SideMenu = ({ regions: _regions, locales: _locales, currentLocale, dictionary, categories, collections }: SideMenuProps) => {
@@ -235,7 +235,7 @@ const SideMenu = ({ regions: _regions, locales: _locales, currentLocale, diction
                       style={{ color: '#999999' }}
                       onClick={close}
                     >
-                      {col.title}
+                      {col.name}
                     </LocalizedClientLink>
                   ))}
                 </div>

@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation"
 import { useRef } from "react"
 
 type CollectionTabsProps = {
-  collections: HttpTypes.StoreCollection[]
+  collections: HttpTypes.StoreProductCategory[]
   mobile?: boolean
 }
 
@@ -33,7 +33,7 @@ const CollectionTabs = ({ collections, mobile }: CollectionTabsProps) => {
               : "border-b border-transparent pb-1 text-gray-500"
           }`}
         >
-          {col.title}
+          {col.name}
         </LocalizedClientLink>
       ))}
     </>

@@ -19,7 +19,7 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
     },
     {
       label: "Kargo & İade",
-      component: <ShippingInfoTab />,
+      component: <ShippingInfoTab product={product} />,
     },
   ]
 
@@ -72,37 +72,67 @@ const ProductInfoTab = ({ product }: ProductTabsProps) => {
   )
 }
 
-const ShippingInfoTab = () => {
+const ShippingInfoTab = ({ product }: ProductTabsProps) => {
+  const isCustomizable = product.metadata?.allows_customization === true
+
+  if (isCustomizable) {
+    return (
+      <div className="text-small-regular py-8">
+        <div className="grid grid-cols-1 gap-y-8">
+          <div className="flex items-start gap-x-2">
+            <FastDelivery />
+            <div>
+              <span className="font-semibold">Kargo</span>
+              <p className="max-w-sm">
+                Siparişiniz size özel hazırlanır.
+                <br />
+                3–7 iş günü içinde kargoya verilir.
+              </p>
+            </div>
+          </div>
+          <div className="flex items-start gap-x-2">
+            <Back />
+            <div>
+              <span className="font-semibold">İade</span>
+              <p className="max-w-sm">
+                Kişiye özel ürünlerde iade kabul edilmemektedir.
+                <br />
+                Herhangi bir üretim hatasında bizimle iletişime geçebilirsiniz.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="text-small-regular py-8">
       <div className="grid grid-cols-1 gap-y-8">
         <div className="flex items-start gap-x-2">
           <FastDelivery />
           <div>
-            <span className="font-semibold">Hızlı Teslimat</span>
+            <span className="font-semibold">Teslimat</span>
             <p className="max-w-sm">
-              Paketiniz 3-5 iş günü içinde teslim noktanıza veya evinize
-              ulaşacaktır.
+              Siparişiniz 1–3 iş günü içinde kargoya verilir.
             </p>
           </div>
         </div>
         <div className="flex items-start gap-x-2">
           <Refresh />
           <div>
-            <span className="font-semibold">Kolay Değişim</span>
+            <span className="font-semibold">Değişim</span>
             <p className="max-w-sm">
-              Beden uymadı mı? Sorun değil — ürününüzü yenisiyle
-              değiştirebilirsiniz.
+              Ürününüz beklentinizi karşılamadıysa bizimle iletişime geçebilirsiniz.
             </p>
           </div>
         </div>
         <div className="flex items-start gap-x-2">
           <Back />
           <div>
-            <span className="font-semibold">Kolay İade</span>
+            <span className="font-semibold">İade</span>
             <p className="max-w-sm">
-              Ürününüzü iade edin, paranızı iade edelim. Soru sormadan —
-              iadenizi en kolay şekilde gerçekleştirmeye çalışacağız.
+              Teslimat tarihinden itibaren 14 gün içinde iade edebilirsiniz.
             </p>
           </div>
         </div>

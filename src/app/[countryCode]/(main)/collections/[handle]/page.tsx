@@ -3,7 +3,7 @@ import { notFound } from "next/navigation"
 
 import { getCollectionByHandle, listCollections } from "@lib/data/collections"
 import { listRegions } from "@lib/data/regions"
-import { StoreCollection, StoreRegion } from "@medusajs/types"
+import { StoreProductCategory, StoreRegion } from "@medusajs/types"
 import CollectionTemplate from "@modules/collections/templates"
 import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
 
@@ -35,7 +35,7 @@ export async function generateStaticParams() {
   )
 
   const collectionHandles = collections.map(
-    (collection: StoreCollection) => collection.handle
+    (collection: StoreProductCategory) => collection.handle
   )
 
   const staticParams = countryCodes
@@ -59,8 +59,8 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   }
 
   const metadata = {
-    title: `${collection.title} | Medusa Store`,
-    description: `${collection.title} collection`,
+    title: `${collection.name} | Medusa Store`,
+    description: `${collection.name} collection`,
   } as Metadata
 
   return metadata
@@ -72,7 +72,7 @@ export default async function CollectionPage(props: Props) {
   const { sortBy, page } = searchParams
 
   const collection = await getCollectionByHandle(params.handle).then(
-    (collection: StoreCollection) => collection
+    (collection: StoreProductCategory) => collection
   )
 
   if (!collection) {
