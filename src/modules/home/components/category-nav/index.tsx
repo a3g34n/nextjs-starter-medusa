@@ -1,21 +1,21 @@
 "use client"
 
 import { useEffect, useState } from "react"
-
-const categories = [
-  { name: "KOLEKSİYON", sectionId: "section-indirim" },
-  { name: "KİŞİSELLEŞTİRME", sectionId: "section-koleksiyon" },
-]
+import { useRouter, useParams } from "next/navigation"
 
 const CategoryNav = () => {
   const [activeIndex, setActiveIndex] = useState(0)
   const [isVisible, setIsVisible] = useState(true)
+  const router = useRouter()
+  const params = useParams()
+  const countryCode = params?.countryCode as string
 
-  const handleClick = (sectionId: string) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
-    }
+  const handleMagazaClick = () => {
+    router.push(`/${countryCode}/store`)
+  }
+
+  const handleKisisellestirmeClick = () => {
+    router.push(`/${countryCode}/collections/kisisellestirme`)
   }
 
   useEffect(() => {
@@ -52,19 +52,26 @@ const CategoryNav = () => {
   return (
     <div className={`fixed bottom-16 left-0 right-0 z-40 transition-opacity duration-300 ${isVisible ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
       <nav className="flex items-center justify-center gap-4 md:gap-8">
-        {categories.map((category, index) => (
-          <button
-            key={category.name}
-            onClick={() => handleClick(category.sectionId)}
-            className={`text-xs md:text-sm tracking-wider transition-all duration-300 ${
-              index === activeIndex
-                ? "text-white font-medium scale-110"
-                : "text-white/60 hover:text-white/80"
-            }`}
-          >
-            {category.name}
-          </button>
-        ))}
+        <button
+          onClick={handleMagazaClick}
+          className={`text-xs md:text-sm tracking-wider transition-all duration-300 ${
+            0 === activeIndex
+              ? "text-white font-medium scale-110"
+              : "text-white/60 hover:text-white/80"
+          }`}
+        >
+          MAĞAZAYI KEŞFET
+        </button>
+        <button
+          onClick={handleKisisellestirmeClick}
+          className={`text-xs md:text-sm tracking-wider transition-all duration-300 ${
+            1 === activeIndex
+              ? "text-white font-medium scale-110"
+              : "text-white/60 hover:text-white/80"
+          }`}
+        >
+          KENDİ ÜRÜNÜNÜ OLUŞTUR
+        </button>
       </nav>
     </div>
   )
