@@ -13,7 +13,7 @@ const Hero = () => {
         className="hidden md:block absolute inset-0 w-full h-full object-cover object-center"
         poster="/hero-poster.jpg"
       >
-        <source src="/hero-video.mp4" type="video/mp4" />
+        <source src="/hero_video.mp4" type="video/mp4" />
         <source src="/hero-video.webm" type="video/webm" />
       </video>
 
@@ -26,7 +26,7 @@ const Hero = () => {
         className="block md:hidden absolute inset-0 w-full h-full object-cover object-center"
         poster="/hero-poster-mobile.jpg"
       >
-        <source src="/hero-video-mobile.mp4" type="video/mp4" />
+        <source src="/hero_video-mobile.mp4" type="video/mp4" />
         <source src="/hero-video-mobile.webm" type="video/webm" />
       </video>
 
