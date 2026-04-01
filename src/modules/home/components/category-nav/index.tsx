@@ -54,7 +54,7 @@ const CategoryNav = () => {
       <nav className="flex items-center justify-center gap-4 md:gap-8">
         <button
           onClick={handleMagazaClick}
-          className={`text-xs md:text-sm tracking-wider transition-all duration-300 ${
+          className={`text-[10px] md:text-sm tracking-wider transition-all duration-300 ${
             0 === activeIndex
               ? "text-white font-medium scale-110"
               : "text-white/60 hover:text-white/80"
@@ -64,7 +64,7 @@ const CategoryNav = () => {
         </button>
         <button
           onClick={handleKisisellestirmeClick}
-          className={`text-xs md:text-sm tracking-wider transition-all duration-300 ${
+          className={`text-[10px] md:text-sm tracking-wider transition-all duration-300 ${
             1 === activeIndex
               ? "text-white font-medium scale-110"
               : "text-white/60 hover:text-white/80"
