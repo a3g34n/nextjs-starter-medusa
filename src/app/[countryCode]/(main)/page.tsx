@@ -25,8 +25,8 @@ export default async function Home(props: {
       {/* Section 2: KOLEKSİYON */}
       <FullscreenSection
         sectionId="section-koleksiyon"
-        singleImageSrc="/images/section-2.png"
-        mobileImageSrc="/images/section-2-mobile.png"
+        singleImageSrc="https://media.lounjstudio.com/home/section-2.webp"
+        mobileImageSrc="https://media.lounjstudio.com/home/section-2-mobile.webp"
         activeIndex={1}
       />
 
