@@ -16,8 +16,9 @@ export const metadata: Metadata = {
 export default async function Checkout({
   params,
 }: {
-  params: { countryCode: string }
+  params: Promise<{ countryCode: string }>
 }) {
+  const { countryCode } = await params
   const cart = await retrieveCart()
 
   if (!cart) {
@@ -25,7 +26,7 @@ export default async function Checkout({
   }
 
   const customer = await retrieveCustomer()
-  const t = getDictionary(params.countryCode)
+  const t = getDictionary(countryCode)
 
   return (
     <div className="grid grid-cols-1 small:grid-cols-[1fr_416px] content-container gap-x-40 py-12">

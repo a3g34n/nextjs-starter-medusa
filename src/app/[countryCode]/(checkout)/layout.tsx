@@ -5,14 +5,15 @@ import MedusaCTA from "@modules/layout/components/medusa-cta"
 // ... imports
 import { getDictionary } from "@lib/util/dictionary"
 
-export default function CheckoutLayout({
+export default async function CheckoutLayout({
   children,
   params,
 }: {
   children: React.ReactNode
-  params: { countryCode: string }
+  params: Promise<{ countryCode: string }>
 }) {
-  const t = getDictionary(params.countryCode)
+  const { countryCode } = await params
+  const t = getDictionary(countryCode)
 
   return (
     <div className="w-full bg-white relative small:min-h-screen">
