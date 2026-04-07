@@ -34,6 +34,14 @@ export const paymentInfoMap: Record<
     title: "Manual Payment",
     icon: <CreditCard />,
   },
+  paytr: {
+    title: "Kredi/Banka Kartı (PayTR)",
+    icon: <CreditCard />,
+  },
+  pp_paytr: {
+    title: "Kredi/Banka Kartı (PayTR)",
+    icon: <CreditCard />,
+  },
   // Add more payment providers here
 }
 
@@ -47,6 +55,11 @@ export const isStripeLike = (providerId?: string) => {
 export const isPaypal = (providerId?: string) => {
   return providerId?.startsWith("pp_paypal")
 }
+
+export const isPaytr = (providerId?: string) => {
+  return providerId?.includes("paytr")
+}
+
 export const isManual = (providerId?: string) => {
   return providerId?.startsWith("pp_system_default")
 }

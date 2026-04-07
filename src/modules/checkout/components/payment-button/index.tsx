@@ -1,12 +1,13 @@
 "use client"
 
-import { isManual, isStripeLike } from "@lib/constants"
+import { isManual, isStripeLike, isPaytr } from "@lib/constants"
 import { placeOrder } from "@lib/data/cart"
 import { HttpTypes } from "@medusajs/types"
 import { Button } from "@medusajs/ui"
 import { useElements, useStripe } from "@stripe/react-stripe-js"
 import React, { useState } from "react"
 import ErrorMessage from "../error-message"
+import PaytrIframe from "../paytr-iframe"
 
 type PaymentButtonProps = {
   cart: HttpTypes.StoreCart
@@ -38,6 +39,8 @@ const PaymentButton: React.FC<PaymentButtonProps> = ({
           dictionary={dictionary}
         />
       )
+    case isPaytr(paymentSession?.provider_id):
+      return <PaytrPaymentButton cart={cart} notReady={notReady} data-testid={dataTestId} dictionary={dictionary} />
     case isManual(paymentSession?.provider_id):
       return (
         <ManualTestPaymentButton notReady={notReady} data-testid={dataTestId} dictionary={dictionary} />
@@ -45,6 +48,42 @@ const PaymentButton: React.FC<PaymentButtonProps> = ({
     default:
       return <Button disabled>{dictionary?.checkout?.select_payment_method ?? "Select a payment method"}</Button>
   }
+}
+
+const PaytrPaymentButton = ({
+  cart,
+  notReady,
+  "data-testid": dataTestId,
+  dictionary,
+}: {
+  cart: HttpTypes.StoreCart
+  notReady: boolean
+  "data-testid"?: string
+  dictionary?: any
+}) => {
+  const session = cart.payment_collection?.payment_sessions?.find(
+    (s) => s.status === "pending"
+  )
+
+  if (notReady) {
+    return (
+      <Button disabled size="large" data-testid={dataTestId}>
+        {dictionary?.checkout?.place_order ?? "Place order"}
+      </Button>
+    )
+  }
+
+  if (!session || !session.data?.token) {
+    return (
+      <ErrorMessage error="PayTR token is missing. Please refresh or try again." />
+    )
+  }
+
+  return (
+    <div className="w-full mt-4">
+      <PaytrIframe token={session.data.token as string} />
+    </div>
+  )
 }
 
 const StripePaymentButton = ({
