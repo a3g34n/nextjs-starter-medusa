@@ -4,7 +4,9 @@ import { sdk } from "@lib/config"
 import { getAuthHeaders, getCacheOptions } from "./cookies"
 import { HttpTypes } from "@medusajs/types"
 
-export const getPaytrToken = async (cartId: string): Promise<string> => {
+export const getPaytrToken = async (
+  cartId: string
+): Promise<{ token: string | null; error: string | null }> => {
   const headers = {
     ...(await getAuthHeaders()),
   }
@@ -20,14 +22,15 @@ export const getPaytrToken = async (cartId: string): Promise<string> => {
     )
 
     if (!response.token) {
-      throw new Error("Backend returned no token")
+      console.error("[getPaytrToken] backend returned no token, cartId:", cartId)
+      return { token: null, error: "Backend returned no token" }
     }
 
-    return response.token
+    return { token: response.token, error: null }
   } catch (err: any) {
     const message = err?.message ?? String(err)
     console.error("[getPaytrToken] failed:", message, "cartId:", cartId)
-    throw new Error(`PayTR token fetch failed: ${message}`)
+    return { token: null, error: message }
   }
 }
 
