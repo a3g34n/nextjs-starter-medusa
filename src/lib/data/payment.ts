@@ -4,6 +4,23 @@ import { sdk } from "@lib/config"
 import { getAuthHeaders, getCacheOptions } from "./cookies"
 import { HttpTypes } from "@medusajs/types"
 
+export const getPaytrToken = async (cartId: string): Promise<string> => {
+  const headers = {
+    ...(await getAuthHeaders()),
+  }
+
+  const response = await sdk.client.fetch<{ token: string }>(
+    `/store/paytr/token`,
+    {
+      method: "POST",
+      body: { cart_id: cartId },
+      headers,
+    }
+  )
+
+  return response.token
+}
+
 export const listCartPaymentMethods = async (regionId: string) => {
   const headers = {
     ...(await getAuthHeaders()),

@@ -2,10 +2,11 @@
 
 import { isManual, isStripeLike, isPaytr } from "@lib/constants"
 import { placeOrder } from "@lib/data/cart"
+import { getPaytrToken } from "@lib/data/payment"
 import { HttpTypes } from "@medusajs/types"
 import { Button } from "@medusajs/ui"
 import { useElements, useStripe } from "@stripe/react-stripe-js"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import ErrorMessage from "../error-message"
 import PaytrIframe from "../paytr-iframe"
 
@@ -61,9 +62,21 @@ const PaytrPaymentButton = ({
   "data-testid"?: string
   dictionary?: any
 }) => {
-  const session = cart.payment_collection?.payment_sessions?.find(
-    (s) => s.status === "pending"
-  )
+  const [token, setToken] = useState<string | null>(null)
+  const [fetchError, setFetchError] = useState<string | null>(null)
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    if (notReady || !cart.id) return
+
+    setLoading(true)
+    setFetchError(null)
+
+    getPaytrToken(cart.id)
+      .then((t) => setToken(t))
+      .catch(() => setFetchError("PayTR token could not be fetched. Please refresh or try again."))
+      .finally(() => setLoading(false))
+  }, [cart.id, notReady])
 
   if (notReady) {
     return (
@@ -73,15 +86,23 @@ const PaytrPaymentButton = ({
     )
   }
 
-  if (!session || !session.data?.token) {
+  if (loading) {
     return (
-      <ErrorMessage error="PayTR token is missing. Please refresh or try again." />
+      <Button disabled size="large" data-testid={dataTestId}>
+        {dictionary?.checkout?.loading ?? "Loading payment..."}
+      </Button>
+    )
+  }
+
+  if (fetchError || !token) {
+    return (
+      <ErrorMessage error={fetchError ?? "PayTR token is missing. Please refresh or try again."} />
     )
   }
 
   return (
     <div className="w-full mt-4">
-      <PaytrIframe token={session.data.token as string} />
+      <PaytrIframe token={token} />
     </div>
   )
 }
