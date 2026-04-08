@@ -9,16 +9,26 @@ export const getPaytrToken = async (cartId: string): Promise<string> => {
     ...(await getAuthHeaders()),
   }
 
-  const response = await sdk.client.fetch<{ token: string }>(
-    `/store/paytr/token`,
-    {
-      method: "POST",
-      body: { cart_id: cartId },
-      headers,
-    }
-  )
+  try {
+    const response = await sdk.client.fetch<{ token: string }>(
+      `/store/paytr/token`,
+      {
+        method: "POST",
+        body: { cart_id: cartId },
+        headers,
+      }
+    )
 
-  return response.token
+    if (!response.token) {
+      throw new Error("Backend returned no token")
+    }
+
+    return response.token
+  } catch (err: any) {
+    const message = err?.message ?? String(err)
+    console.error("[getPaytrToken] failed:", message, "cartId:", cartId)
+    throw new Error(`PayTR token fetch failed: ${message}`)
+  }
 }
 
 export const listCartPaymentMethods = async (regionId: string) => {

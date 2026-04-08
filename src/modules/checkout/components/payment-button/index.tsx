@@ -74,7 +74,7 @@ const PaytrPaymentButton = ({
 
     getPaytrToken(cart.id)
       .then((t) => setToken(t))
-      .catch(() => setFetchError("PayTR token could not be fetched. Please refresh or try again."))
+      .catch((err: any) => setFetchError(err?.message ?? "PayTR token could not be fetched. Please refresh or try again."))
       .finally(() => setLoading(false))
   }, [cart.id, notReady])
 
