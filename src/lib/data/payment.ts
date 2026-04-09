@@ -12,7 +12,7 @@ export const getPaytrToken = async (
   }
 
   try {
-    const response = await sdk.client.fetch<{ token: string }>(
+    const response = await sdk.client.fetch<{ iframe_token: string }>(
       `/store/paytr/token`,
       {
         method: "POST",
@@ -21,12 +21,12 @@ export const getPaytrToken = async (
       }
     )
 
-    if (!response.token) {
+    if (!response.iframe_token) {
       console.error("[getPaytrToken] backend returned no token, cartId:", cartId)
       return { token: null, error: "Backend returned no token" }
     }
 
-    return { token: response.token, error: null }
+    return { token: response.iframe_token, error: null }
   } catch (err: any) {
     const message = err?.message ?? String(err)
     console.error("[getPaytrToken] failed:", message, "cartId:", cartId)
