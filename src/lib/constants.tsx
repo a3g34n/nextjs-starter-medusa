@@ -34,11 +34,7 @@ export const paymentInfoMap: Record<
     title: "Manual Payment",
     icon: <CreditCard />,
   },
-  paytr: {
-    title: "Kredi/Banka Kartı (PayTR)",
-    icon: <CreditCard />,
-  },
-  pp_paytr: {
+  pp_paytr_paytr: {
     title: "Kredi/Banka Kartı (PayTR)",
     icon: <CreditCard />,
   },
