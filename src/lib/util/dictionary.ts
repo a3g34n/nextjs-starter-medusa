@@ -2,6 +2,7 @@ export type Locale = "en" | "tr"
 
 const dictionary = {
   en: {
+    locale: "en-US",
     common: {
       search: "Search",
       account: "Account",
@@ -113,6 +114,17 @@ const dictionary = {
       apply_gift_card: "Apply Gift Card",
       discount_code: "Discount Code",
       gift_card_label: "Enter gift card or discount code",
+      first_name: "First name",
+      last_name: "Last name",
+      address: "Address",
+      company: "Company",
+      postal_code: "Postal code",
+      city: "City",
+      state_province: "State / Province",
+      email: "Email",
+      phone: "Phone",
+      billing_same_as_shipping: "Billing address same as shipping address",
+      use_saved_address: "Hi, do you want to use one of your saved addresses?",
       continue_to_delivery: "Continue to delivery",
       continue_to_payment: "Continue to payment",
       continue_to_review: "Continue to review",
@@ -230,6 +242,7 @@ const dictionary = {
     },
   },
   tr: {
+    locale: "tr-TR",
     common: {
       search: "Ara",
       account: "Hesap",
@@ -341,6 +354,17 @@ const dictionary = {
       apply_gift_card: "Hediye Kartı Kullan",
       discount_code: "İndirim Kodu",
       gift_card_label: "Hediye kartı veya indirim kodu girin",
+      first_name: "Ad",
+      last_name: "Soyad",
+      address: "Adres",
+      company: "Şirket",
+      postal_code: "Posta Kodu",
+      city: "Şehir",
+      state_province: "İlçe / Bölge",
+      email: "E-posta",
+      phone: "Telefon",
+      billing_same_as_shipping: "Teslimat adresiyle aynı fatura adresi",
+      use_saved_address: "Kayıtlı adreslerinizden birini kullanmak ister misiniz?",
       continue_to_delivery: "Teslimat adımına geç",
       continue_to_payment: "Ödeme adımına geç",
       continue_to_review: "Özete geç",

@@ -25,7 +25,10 @@ const OrderDetails = ({ order, showStatus, dictionary }: OrderDetailsProps) => {
       <Text className="mt-2">
         {dictionary?.order?.order_date ?? "Order date"}:{" "}
         <span data-testid="order-date">
-          {new Date(order.created_at).toDateString()}
+          {new Date(order.created_at).toLocaleDateString(
+          dictionary?.locale ?? "en-US",
+          { year: "numeric", month: "long", day: "numeric" }
+        )}
         </span>
       </Text>
       <Text className="mt-2 text-ui-fg-interactive">

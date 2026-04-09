@@ -58,7 +58,7 @@ const Addresses = ({
               className="text-ui-fg-interactive hover:text-ui-fg-interactive-hover"
               data-testid="edit-address-button"
             >
-              Edit
+              {dictionary?.common?.edit ?? "Edit"}
             </button>
           </Text>
         )}
@@ -71,6 +71,7 @@ const Addresses = ({
               checked={sameAsBilling}
               onChange={toggleSameAsBilling}
               cart={cart}
+              dictionary={dictionary}
             />
 
             {!sameAsBilling && (
@@ -82,7 +83,7 @@ const Addresses = ({
                   {dictionary?.checkout?.billing_address ?? "Billing address"}
                 </Heading>
 
-                <BillingAddress cart={cart} />
+                <BillingAddress cart={cart} dictionary={dictionary} />
               </div>
             )}
             <SubmitButton className="mt-6" data-testid="submit-address-button">
