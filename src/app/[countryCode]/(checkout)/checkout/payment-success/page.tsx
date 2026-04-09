@@ -1,9 +1,8 @@
-import { removeCartId, getCacheTag } from "@lib/data/cookies"
 import { getPaytrOrderByCart } from "@lib/data/payment"
-import { revalidateTag } from "next/cache"
 import { redirect } from "next/navigation"
 import { Heading } from "@medusajs/ui"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import ClearCartAndRevalidate from "./clear-cart"
 
 export default async function PaymentSuccessPage({
   params,
@@ -15,13 +14,6 @@ export default async function PaymentSuccessPage({
   const { countryCode } = await params
   const { cart_id } = await searchParams
 
-  // Clear cart cookie — payment done
-  await removeCartId()
-
-  // Revalidate orders cache
-  const orderCacheTag = await getCacheTag("orders")
-  if (orderCacheTag) revalidateTag(orderCacheTag)
-
   // Look up order by cart ID via backend custom endpoint
   if (cart_id) {
     const { order_id } = await getPaytrOrderByCart(cart_id)
@@ -30,9 +22,11 @@ export default async function PaymentSuccessPage({
     }
   }
 
-  // Fallback: order lookup failed
+  // Fallback: order lookup failed — show success message
+  // ClearCartAndRevalidate handles cookie removal + cache revalidation via server action
   return (
     <div className="py-6 min-h-[calc(100vh-64px)]">
+      <ClearCartAndRevalidate />
       <div className="content-container flex flex-col justify-center items-center gap-y-10 max-w-4xl h-full w-full">
         <div className="flex flex-col gap-4 max-w-4xl h-full bg-white w-full py-10 items-center text-center">
           <Heading
