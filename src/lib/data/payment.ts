@@ -5,7 +5,9 @@ import { getAuthHeaders, getCacheOptions } from "./cookies"
 import { HttpTypes } from "@medusajs/types"
 
 export const getPaytrToken = async (
-  cartId: string
+  cartId: string,
+  okUrl: string,
+  failUrl: string
 ): Promise<{ token: string | null; error: string | null }> => {
   const headers = {
     ...(await getAuthHeaders()),
@@ -16,7 +18,7 @@ export const getPaytrToken = async (
       `/store/paytr/token`,
       {
         method: "POST",
-        body: { cart_id: cartId },
+        body: { cart_id: cartId, ok_url: okUrl, fail_url: failUrl },
         headers,
       }
     )
@@ -31,6 +33,35 @@ export const getPaytrToken = async (
     const message = err?.message ?? String(err)
     console.error("[getPaytrToken] failed:", message, "cartId:", cartId)
     return { token: null, error: message }
+  }
+}
+
+export const getPaytrOrderByCart = async (
+  cartId: string
+): Promise<{ order_id: string | null; error: string | null }> => {
+  const headers = {
+    ...(await getAuthHeaders()),
+  }
+
+  try {
+    const response = await sdk.client.fetch<{ order_id: string }>(
+      `/store/paytr/order-by-cart`,
+      {
+        method: "GET",
+        query: { cart_id: cartId },
+        headers,
+      }
+    )
+
+    if (!response.order_id) {
+      return { order_id: null, error: "No order found for cart" }
+    }
+
+    return { order_id: response.order_id, error: null }
+  } catch (err: any) {
+    const message = err?.message ?? String(err)
+    console.error("[getPaytrOrderByCart] failed:", message, "cartId:", cartId)
+    return { order_id: null, error: message }
   }
 }
 

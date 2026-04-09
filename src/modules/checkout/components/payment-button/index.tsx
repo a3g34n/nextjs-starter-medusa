@@ -72,7 +72,12 @@ const PaytrPaymentButton = ({
     setLoading(true)
     setFetchError(null)
 
-    getPaytrToken(cart.id)
+    const countryCode = cart.shipping_address?.country_code?.toLowerCase() ?? "tr"
+    const base = window.location.origin
+    const okUrl = `${base}/${countryCode}/checkout/payment-success?cart_id=${cart.id}`
+    const failUrl = `${base}/${countryCode}/checkout/payment-failed?cart_id=${cart.id}`
+
+    getPaytrToken(cart.id, okUrl, failUrl)
       .then(({ token: t, error }) => {
         if (error || !t) {
           setFetchError(error ?? "PayTR token could not be fetched. Please refresh or try again.")
