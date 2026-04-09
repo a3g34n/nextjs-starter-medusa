@@ -40,7 +40,7 @@ export default async function PaymentSuccessPage({
             Siparişiniz işleme alınmıştır. Birkaç dakika içinde siparişinizi hesabınızdan takip edebilirsiniz.
           </p>
           <LocalizedClientLink
-            href="/account/orders"
+            href="/account"
             className="bg-black text-white px-6 py-3 rounded hover:bg-gray-800 transition-colors"
           >
             Siparişlerimi Görüntüle
