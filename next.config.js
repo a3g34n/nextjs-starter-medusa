@@ -46,6 +46,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "media.lounjstudio.com",
       },
+      {
+        protocol: "https",
+        hostname: "admin.lounjstudio.com",
+      },
       ...(S3_HOSTNAME && S3_PATHNAME
         ? [
             {
