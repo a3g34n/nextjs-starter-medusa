@@ -183,9 +183,9 @@ export default function ProductActions({
               <input
                 type="text"
                 value={initials}
-                onChange={(e) => setInitials(e.target.value.toUpperCase().slice(0, 3))}
+                onChange={(e) => setInitials(e.target.value.toUpperCase())}
                 placeholder="XXX"
-                maxLength={3}
+                maxLength={50}
                 className="border border-gray-200 h-9 px-3 text-xs tracking-widest uppercase placeholder:text-gray-300 focus:outline-none focus:border-gray-800 transition-all w-full"
                 disabled={!!disabled || isAdding}
               />
