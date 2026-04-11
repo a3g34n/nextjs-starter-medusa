@@ -41,8 +41,9 @@ export default async function CheckoutLayout({
             <Image
               src="/logo.png"
               alt="Lounj Studio"
-              width={120}
-              height={40}
+              width={360}
+              height={120}
+              quality={100}
               className="object-contain h-10 w-auto"
             />
           </LocalizedClientLink>

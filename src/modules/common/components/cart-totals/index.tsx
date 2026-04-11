@@ -12,6 +12,7 @@ type CartTotalsProps = {
     item_subtotal?: number | null
     shipping_subtotal?: number | null
     discount_subtotal?: number | null
+    shipping_methods?: { id: string }[] | null
   }
 }
 
@@ -23,7 +24,10 @@ const CartTotals: React.FC<CartTotalsProps> = ({ totals }) => {
     item_subtotal,
     shipping_subtotal,
     discount_subtotal,
+    shipping_methods,
   } = totals
+
+  const hasShippingMethod = (shipping_methods?.length ?? 0) > 0
 
   return (
     <div>
@@ -34,16 +38,16 @@ const CartTotals: React.FC<CartTotalsProps> = ({ totals }) => {
             {convertToLocale({ amount: item_subtotal ?? 0, currency_code })}
           </span>
         </div>
-        <div className="flex items-center justify-between">
-          <span>Kargo</span>
-          <span data-testid="cart-shipping" data-value={shipping_subtotal || 0}>
-            {shipping_subtotal == null
-              ? "-"
-              : shipping_subtotal === 0
-              ? "Ücretsiz"
-              : convertToLocale({ amount: shipping_subtotal, currency_code })}
-          </span>
-        </div>
+        {hasShippingMethod && (
+          <div className="flex items-center justify-between">
+            <span>Kargo</span>
+            <span data-testid="cart-shipping" data-value={shipping_subtotal || 0}>
+              {shipping_subtotal === 0
+                ? "Ücretsiz"
+                : convertToLocale({ amount: shipping_subtotal ?? 0, currency_code })}
+            </span>
+          </div>
+        )}
         {!!discount_subtotal && (
           <div className="flex items-center justify-between">
             <span>İndirim</span>
