@@ -386,16 +386,17 @@ const Shipping: React.FC<ShippingProps> = ({
         <div>
           <div className="text-small-regular">
             {cart && (cart.shipping_methods?.length ?? 0) > 0 && (
-              <div className="flex flex-col w-1/3">
-                <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                  {dictionary?.checkout?.method ?? "Method"}
+              <div className="flex items-center justify-between">
+                <Text className="txt-medium-plus text-ui-fg-base">
+                  {cart.shipping_methods!.at(-1)!.name}
                 </Text>
                 <Text className="txt-medium text-ui-fg-subtle">
-                  {cart.shipping_methods!.at(-1)!.name}{" "}
-                  {convertToLocale({
-                    amount: cart.shipping_methods!.at(-1)!.amount!,
-                    currency_code: cart?.currency_code,
-                  })}
+                  {cart.shipping_methods!.at(-1)!.amount === 0
+                    ? "Ücretsiz"
+                    : convertToLocale({
+                        amount: cart.shipping_methods!.at(-1)!.amount!,
+                        currency_code: cart?.currency_code,
+                      })}
                 </Text>
               </div>
             )}

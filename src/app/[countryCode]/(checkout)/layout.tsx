@@ -1,6 +1,7 @@
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import ChevronDown from "@modules/common/icons/chevron-down"
 import MedusaCTA from "@modules/layout/components/medusa-cta"
+import Image from "next/image"
 
 // ... imports
 import { getDictionary } from "@lib/util/dictionary"
@@ -34,10 +35,16 @@ export default async function CheckoutLayout({
           </LocalizedClientLink>
           <LocalizedClientLink
             href="/"
-            className="txt-compact-xlarge-plus text-ui-fg-subtle hover:text-ui-fg-base uppercase"
+            className="hover:opacity-80 transition-opacity"
             data-testid="store-link"
           >
-            {t.checkout.store_logo}
+            <Image
+              src="/logo.png"
+              alt="Lounj Studio"
+              width={120}
+              height={40}
+              className="object-contain h-10 w-auto"
+            />
           </LocalizedClientLink>
           <div className="flex-1 basis-0" />
         </nav>
