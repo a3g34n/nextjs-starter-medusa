@@ -66,6 +66,8 @@ export default function HelpPage() {
               </p>
               <p>
                 <strong>E-posta:</strong> info@lounjstudio.com<br/>
+                <strong>Telefon:</strong> +90 531 596 85 96<br/>
+                <strong>Adres:</strong> Güzelyalı mah. 76sk. Konak/İzmir<br/>
                 <strong>Çalışma Saatleri:</strong> Pazartesi - Cuma, 09:00 - 18:00
               </p>
             </div>

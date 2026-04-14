@@ -20,13 +20,15 @@ export default function ContactPage() {
             <div className="bg-gray-50 p-8 text-center">
               <h3 className="text-lg font-medium mb-4 uppercase">Müşteri Hizmetleri</h3>
               <p className="mb-2">E-posta: info@lounjstudio.com</p>
+              <p className="mb-2">Telefon: +90 531 596 85 96</p>
               <p className="text-sm text-gray-500 mt-4">Pazartesi - Cuma: 09:00 - 18:00</p>
             </div>
 
             <div className="bg-gray-50 p-8 text-center">
               <h3 className="text-lg font-medium mb-4 uppercase">Adres</h3>
-              <p>LounjStudio Genel Merkez</p>
-              <p>İstanbul, Türkiye</p>
+              <p>LounjStudio</p>
+              <p>Güzelyalı mah. 76sk.</p>
+              <p>Konak/İzmir</p>
             </div>
           </div>
         </div>
